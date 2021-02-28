@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import {CARD_STATUS} from "@/assets/constant";
 const api = axios.create({
-    baseURL: 'http://13.124.121.110:5003/cards/'
+    baseURL: 'http://3.34.200.124:5003/cards/'
 })
 
 Vue.use(Vuex)
