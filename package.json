@@ -1,10 +1,13 @@
 {
   "name": "cards-organizer",
   "version": "0.1.0",
+  "homepage": "./",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "prebuild": "rm -rf docs",
+    "postbuild": "mv dist docs"
   },
   "dependencies": {
     "core-js": "^3.6.5",
