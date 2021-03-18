@@ -17,11 +17,11 @@ export default class CalendarRow extends Vue {
     @Prop({default: {}}) year
 
     get startDate() {
-        return new Date(this.card.period.start)
+        return new Date(this.card.period_start)
     }
 
     get endDate() {
-        return new Date(this.card.period.end)
+        return new Date(this.card.period_end)
     }
 
     get startPoint() {

@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import {CARD_STATUS} from "@/assets/constant";
 const api = axios.create({
-    baseURL: 'http://3.34.200.124:5003/cards/'
+    baseURL: 'https://conanshin-server.azurewebsites.net/cards-organizer/'
 })
 
 Vue.use(Vuex)
@@ -70,7 +70,7 @@ export default new Vuex.Store({
     actions: {
         fetch: async store => {
             const {data} = await api.get('')
-            store.commit('cards', data)
+            store.commit('cards', data.filter(card => card.deleted === 'n'))
         },
         save: async store => {
             const card = store.state.cards.find(card => card.selected)
