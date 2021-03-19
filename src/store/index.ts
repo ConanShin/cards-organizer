@@ -5,6 +5,7 @@ import axios from 'axios'
 import {CARD_STATUS} from "@/assets/constant";
 const api = axios.create({
     baseURL: 'https://conanshin-server.azurewebsites.net/cards-organizer/'
+    // baseURL: 'http://localhost:3000/cards-organizer/'
 })
 
 Vue.use(Vuex)
@@ -36,7 +37,7 @@ export default new Vuex.Store({
                 depositBank: '',
                 annualFee: '',
                 monthlyUsage: '',
-                automaticDebit: [],
+                debits: [],
                 period: {
                     start: new Date().toISOString().substr(0, 10),
                     end: new Date().toISOString().substr(0, 10)
@@ -60,11 +61,13 @@ export default new Vuex.Store({
         },
         addMonthlyPayment: state => {
             const monthlyPayment = {name: '', cost: ''}
-            state.cards.find(card => card.selected).automaticDebit.push(monthlyPayment)
+            const currentCard = state.cards.find(card => card.selected)
+            if (!currentCard.debits) currentCard.debits = []
+            currentCard.debits.push(monthlyPayment)
         },
         deleteMonthlyPayment: (state, monthlyPayment) => {
-            const deleteIndex = state.cards.find(card => card.selected).automaticDebit.findIndex(debit => debit === monthlyPayment)
-            state.cards.find(card => card.selected).automaticDebit.splice(deleteIndex, 1)
+            const deleteIndex = state.cards.find(card => card.selected).debits.findIndex(debit => debit === monthlyPayment)
+            state.cards.find(card => card.selected).debits.splice(deleteIndex, 1)
         }
     },
     actions: {

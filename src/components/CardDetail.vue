@@ -10,22 +10,22 @@
         </div>
         <div class="field">
             <label>결제 은행</label>
-            <input v-model="card.depositBank"/>
+            <input v-model="card.deposit_bank"/>
         </div>
         <div class="field">
             <label>연회비</label>
-            <input v-model="card.annualFee"/>
+            <input v-model="card.annual_fee"/>
         </div>
         <div class="field">
             <label>사용금액</label>
-            <input v-model="card.monthlyUsage"/>
+            <input v-model="card.monthly_usage"/>
         </div>
         <div class="field vertical">
             <div class="horizontal">
                 <label>자동 결제</label>
                 <div class="plus" @click="addMonthlyPayment">+</div>
             </div>
-            <div class="horizontal" v-for="monthlyPaymanet in card.automaticDebit">
+            <div class="horizontal" v-for="monthlyPaymanet in card.debits">
                 <div class="horizontal">
                     <label>내용</label>
                     <input v-model="monthlyPaymanet.name"/>
@@ -40,11 +40,11 @@
         <div class="field vertical">
             <div class="horizontal">
                 <label>시작일자</label>
-                <input type="date" v-model="card.period.start"/>
+                <input type="date" v-model="card.period_start"/>
             </div>
             <div class="horizontal">
                 <label>종료일자</label>
-                <input type="date" v-model="card.period.end"/>
+                <input type="date" v-model="card.period_end"/>
             </div>
         </div>
         <div class="field">
@@ -70,6 +70,7 @@ export default class Card extends Vue {
 
     addMonthlyPayment() {
         this.$store.commit('addMonthlyPayment')
+        this.$forceUpdate()
     }
 
     deleteMonthlyPayment(monthlyPayment) {
