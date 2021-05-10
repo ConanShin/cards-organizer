@@ -1,12 +1,20 @@
 <template>
     <div class="holdings section">
-        <h5>Cards</h5>
+        <div>
+            <h5>카드 및 관리비</h5>
+            <input type="checkbox" v-model="showTerminated"/>
+            <span>해지카드 표시</span>
+        </div>
         <div class="deck">
             <div class="cards">
-                <div :class="['card', card.holder, card.status]" v-for="(card, index) in conanCards" :cardIndex="index" @click="select(card)">{{card.name}}</div>
+                <div :class="['card', card.holder, card.status]" v-for="(card, index) in conanCards" :cardIndex="index"
+                     @click="select(card)">{{ card.name }}
+                </div>
             </div>
             <div class="cards">
-                <div :class="['card', card.holder, card.status]" v-for="(card, index) in chaejiCards" :cardIndex="index" @click="select(card)">{{card.name}}</div>
+                <div :class="['card', card.holder, card.status]" v-for="(card, index) in chaejiCards" :cardIndex="index"
+                     @click="select(card)">{{ card.name }}
+                </div>
                 <div class="new card" @click="add">+</div>
             </div>
         </div>
@@ -18,16 +26,20 @@ import {Vue, Component} from 'vue-property-decorator'
 
 @Component
 export default class Holdings extends Vue {
+    showTerminated = false
+
     get cards() {
         return this.$store.getters.cards
     }
 
     get conanCards() {
-        return this.cards.filter(card => card.holder === 'conan')
+        if(this.showTerminated) return this.cards.filter(card => card.holder === 'conan')
+        else return this.cards.filter(card => card.holder === 'conan' && card.status !== 'terminated')
     }
 
     get chaejiCards() {
-        return this.cards.filter(card => card.holder === 'chaeji')
+        if(this.showTerminated) return this.cards.filter(card => card.holder === 'chaeji')
+        else return this.cards.filter(card => card.holder === 'chaeji' && card.status !== 'terminated')
     }
 
     add() {
@@ -43,13 +55,16 @@ export default class Holdings extends Vue {
 <style scoped lang="scss">
 .holdings.section {
 }
+
 .deck {
     display: flex;
 }
+
 .cards {
     width: 200px;
     margin-right: 10px;
 }
+
 .card {
     width: 100%;
     height: 100px;
@@ -62,8 +77,16 @@ export default class Holdings extends Vue {
     margin-bottom: 5px;
     font-size: 12px;
 
-    &.using { border-color: green }
-    &.keeping { border-color: yellow }
-    &.terminated { border-color: red }
+    &.using {
+        border-color: green
+    }
+
+    &.keeping {
+        border-color: yellow
+    }
+
+    &.terminated {
+        border-color: red
+    }
 }
 </style>
