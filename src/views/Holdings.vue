@@ -3,19 +3,62 @@
         <header class="holdings-header">
             <h2 class="holdings-title">카드 보유 현황</h2>
             <div class="header-controls">
-                <div class="filter-controls">
-                    <label class="checkbox-label">
+                <div class="search-controls">
+                    <div class="search-input-container">
                         <input 
-                            type="checkbox" 
-                            v-model="showTerminated"
-                            class="checkbox-input"
+                            v-model="searchCompany"
+                            class="search-input"
+                            placeholder="카드사명 검색 (예: 삼성, 신한)"
+                            @keyup.enter="searchCardCompany"
                         />
-                        <span class="checkbox-text">해지된 카드 표시</span>
-                    </label>
+                        <button class="search-button" @click="searchCardCompany">
+                            🔍
+                        </button>
+                    </div>
+                    <div v-if="searchResults.length > 0" class="search-results">
+                        <div class="search-results-header">
+                            <h3 class="search-results-title">{{ searchCompany }} 카드사 검색 결과</h3>
+                            <button class="close-search-result" @click="clearSearchResult">×</button>
+                        </div>
+                        <div class="search-results-content">
+                            <div v-for="userResult in searchResults" :key="userResult.user" class="user-search-result">
+                                <div class="user-header">
+                                    <h4 class="user-name">{{ userResult.user }}</h4>
+                                </div>
+                                <div v-for="result in userResult.results" :key="result.cardName" class="search-result-item">
+                                    <div class="card-info">
+                                        <span class="card-name">{{ result.cardName }}</span>
+                                    </div>
+                                    <div class="status-info">
+                                        <span v-if="result.status === 'terminated'" class="terminated-info">
+                                            가장 최근 탈퇴일: 
+                                            <span class="termination-date">{{ formatDate(result.terminationDate || '') }} ({{ getDaysSinceTermination(result.terminationDate || '') }}일 경과)</span>
+                                        </span>
+                                        <span v-else class="using-info">
+                                            탈퇴예정일: 
+                                            <span class="end-date">{{ formatDate(result.endDate || '') }}</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="add-card-button" @click="addNewCard" v-if="!isMobile">
-                    <div class="add-icon">+</div>
-                    <div class="add-text">새 카드 추가</div>
+                <div class="header-buttons">
+                    <div class="filter-controls">
+                        <label class="checkbox-label">
+                            <input 
+                                type="checkbox" 
+                                v-model="showTerminated"
+                                class="checkbox-input"
+                            />
+                            <span class="checkbox-text">해지된 카드 표시</span>
+                        </label>
+                    </div>
+                    <div class="add-card-button" @click="addNewCard" v-if="!isMobile">
+                        <div class="add-icon">+</div>
+                        <div class="add-text">새 카드 추가</div>
+                    </div>
                 </div>
             </div>
         </header>
@@ -60,20 +103,45 @@
 import { Vue, Component } from 'vue-property-decorator'
 import { CARD_STATUS } from '@/assets/constant'
 
+// @ts-ignore
+
 interface Card {
     id?: string
     name: string
     holder: 'conan' | 'chaeji'
     status: string
     selected?: boolean
+    period_start?: string
+    period_end?: string
+    deposit_bank?: string
+    annual_fee?: string
+    monthly_usage?: string
+    debits?: any[]
+}
+
+interface SearchResult {
+    company: string
+    terminationDate?: string
+    endDate?: string
+    user: string
+    status: string
+    cardName: string
+}
+
+interface UserSearchResult {
+    user: string
+    results: SearchResult[]
 }
 
 @Component
 export default class Holdings extends Vue {
     showTerminated: boolean = false
     isMobile: boolean = false
+    searchCompany: string = ''
+    searchResults: UserSearchResult[] = []
 
     get cards(): Card[] {
+        // @ts-ignore
         return this.$store.getters.cards || []
     }
 
@@ -118,8 +186,10 @@ export default class Holdings extends Vue {
     selectCard(card: Card): void {
         // 이미 선택된 카드를 클릭하면 선택 해제
         if (card.selected) {
+            // @ts-ignore
             this.$store.commit('reset')
         } else {
+            // @ts-ignore
             this.$store.commit('selectCard', card)
         }
     }
@@ -141,10 +211,107 @@ export default class Holdings extends Vue {
         }
         
         // 기존 선택 해제
+        // @ts-ignore
         this.$store.commit('reset')
         
         // 임시 카드를 선택된 상태로 설정
+        // @ts-ignore
         this.$store.commit('selectTempCard', tempCard)
+    }
+
+    getCardCompany(cardName: string): string {
+        // 카드 이름을 공백으로 분리하여 첫 번째 인자를 카드사명으로 반환
+        return cardName.split(' ')[0] || ''
+    }
+
+    searchCardCompany(): void {
+        if (!this.searchCompany.trim()) {
+            alert('카드사명을 입력해주세요.')
+            return
+        }
+
+        const companyName = this.searchCompany.trim()
+        
+        // 해당 카드사의 모든 카드들을 찾기
+        const companyCards = this.cards.filter(card => {
+            const cardCompany = this.getCardCompany(card.name)
+            return cardCompany.toLowerCase().includes(companyName.toLowerCase())
+        })
+
+        if (companyCards.length === 0) {
+            alert(`${companyName} 카드사의 카드를 찾을 수 없습니다.`)
+            this.searchResults = []
+            return
+        }
+
+        // 사용자별로 그룹화
+        const userGroups = new Map<string, Card[]>()
+        companyCards.forEach(card => {
+            if (!userGroups.has(card.holder)) {
+                userGroups.set(card.holder, [])
+            }
+            userGroups.get(card.holder)!.push(card)
+        })
+
+        // 각 사용자별로 가장 최근 카드 찾기
+        this.searchResults = Array.from(userGroups.entries()).map(([user, cards]) => {
+            // 해지된 카드와 사용중인 카드 분리
+            const terminatedCards = cards.filter(card => card.status === CARD_STATUS.TERMINATED)
+            const usingCards = cards.filter(card => card.status === CARD_STATUS.USING || card.status === CARD_STATUS.KEEPING)
+
+            let resultCard = null
+
+            // 사용중인 카드가 있으면 우선 표시
+            if (usingCards.length > 0) {
+                // 가장 최근 종료일을 가진 사용중인 카드 찾기
+                resultCard = usingCards.reduce((latest, current) => {
+                    const latestDate = new Date(latest.period_end || '')
+                    const currentDate = new Date(current.period_end || '')
+                    return currentDate > latestDate ? current : latest
+                })
+            } else if (terminatedCards.length > 0) {
+                // 사용중인 카드가 없으면 가장 최근 탈퇴일을 가진 카드 찾기
+                resultCard = terminatedCards.reduce((latest, current) => {
+                    const latestDate = new Date(latest.period_end || '')
+                    const currentDate = new Date(current.period_end || '')
+                    return currentDate > latestDate ? current : latest
+                })
+            }
+
+            return {
+                user,
+                results: resultCard ? [{
+                    company: this.getCardCompany(resultCard.name),
+                    cardName: resultCard.name,
+                    user: resultCard.holder,
+                    status: resultCard.status,
+                    terminationDate: resultCard.status === CARD_STATUS.TERMINATED ? resultCard.period_end : undefined,
+                    endDate: resultCard.status !== CARD_STATUS.TERMINATED ? resultCard.period_end : undefined
+                }] : []
+            }
+        }).filter(userResult => userResult.results.length > 0)
+    }
+
+    clearSearchResult(): void {
+        this.searchResults = []
+        this.searchCompany = ''
+    }
+
+    formatDate(dateString: string): string {
+        const date = new Date(dateString)
+        return date.toLocaleDateString('ko-KR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        })
+    }
+
+    getDaysSinceTermination(terminationDate: string): number {
+        const today = new Date()
+        const termination = new Date(terminationDate)
+        const diffTime = today.getTime() - termination.getTime()
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
+        return diffDays
     }
 
     checkMobile(): void {
@@ -188,9 +355,166 @@ export default class Holdings extends Vue {
 
     .header-controls {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
         gap: 1rem;
+    }
+
+    .search-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .search-input-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .search-input {
+        flex: 1;
+        padding: 0.5rem 0.75rem;
+        border: 2px solid #555;
+        border-radius: 6px;
+        background: #3a3a3a;
+        color: #e0e0e0;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+
+        &:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        &::placeholder {
+            color: #888;
+        }
+    }
+
+    .search-button {
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 0.5rem 0.75rem;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: #0056b3;
+            transform: translateY(-1px);
+        }
+    }
+
+    .search-results {
+        background: #1a3a5c;
+        border: 1px solid #007bff;
+        border-radius: 6px;
+        color: #e0e0e0;
+        margin-top: 0.5rem;
+
+        .search-results-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #007bff;
+
+            .search-results-title {
+                margin: 0;
+                font-size: 1rem;
+                font-weight: 600;
+                color: #e0e0e0;
+            }
+
+            .close-search-result {
+                background: none;
+                border: none;
+                color: #e0e0e0;
+                font-size: 1.2rem;
+                cursor: pointer;
+                padding: 0.25rem;
+                border-radius: 3px;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                }
+            }
+        }
+
+        .search-results-content {
+            padding: 0.5rem;
+
+            .user-search-result {
+                margin-bottom: 1rem;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                .user-header {
+                    margin-bottom: 0.5rem;
+
+                    .user-name {
+                        margin: 0;
+                        font-size: 0.9rem;
+                        font-weight: 600;
+                        color: #007bff;
+                        padding: 0.25rem 0.5rem;
+                        background: rgba(0, 123, 255, 0.1);
+                        border-radius: 4px;
+                        display: inline-block;
+                    }
+                }
+
+                .search-result-item {
+                    padding: 0.5rem;
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 4px;
+                    margin-left: 0.5rem;
+
+                    .card-info {
+                        margin-bottom: 0.5rem;
+
+                        .card-name {
+                            color: #e0e0e0;
+                            font-weight: 500;
+                            font-size: 0.9rem;
+                        }
+                    }
+
+                    .status-info {
+                        font-size: 0.85rem;
+
+                        .terminated-info {
+                            color: #dc3545;
+                        }
+
+                        .using-info {
+                            color: #28a745;
+                        }
+
+                        .termination-date,
+                        .end-date {
+                            color: #ffc107;
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .header-buttons {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
 
     .filter-controls {
@@ -206,12 +530,13 @@ export default class Holdings extends Vue {
             cursor: pointer;
             font-size: 0.7rem;
             color: #b0b0b0;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.8rem;
             border: 2px dashed #6c757d;
             border-radius: 8px;
             background: #3a3a3a;
             transition: all 0.3s ease;
             min-width: 80px;
+            max-width: 80px;
             height: 56px;
 
             &:hover {
@@ -242,7 +567,7 @@ export default class Holdings extends Vue {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 0.8rem;
         border: 2px dashed #6c757d;
         border-radius: 8px;
         background: #3a3a3a;
@@ -250,6 +575,7 @@ export default class Holdings extends Vue {
         cursor: pointer;
         transition: all 0.3s ease;
         min-width: 80px;
+        max-width: 80px;
         height: 56px;
 
         &:hover {
@@ -434,11 +760,72 @@ export default class Holdings extends Vue {
             margin-bottom: 0.75rem;
         }
 
-        .header-controls {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.75rem;
+    .header-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .search-controls {
+        width: 100%;
+    }
+
+    .search-input-container {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .search-input {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+    .search-button {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+    .search-results {
+        .search-results-header {
+            padding: 0.5rem 0.75rem;
+
+            .search-results-title {
+                font-size: 0.9rem;
+            }
         }
+
+        .search-results-content {
+            padding: 0.25rem;
+
+            .user-search-result {
+                margin-bottom: 0.75rem;
+
+                .user-header {
+                    .user-name {
+                        font-size: 0.8rem;
+                        padding: 0.2rem 0.4rem;
+                    }
+                }
+
+                .search-result-item {
+                    padding: 0.4rem;
+                    margin-left: 0.25rem;
+
+                    .card-info {
+                        margin-bottom: 0.4rem;
+
+                        .card-name {
+                            font-size: 0.8rem;
+                        }
+                    }
+
+                    .status-info {
+                        font-size: 0.75rem;
+                    }
+                }
+            }
+        }
+    }
 
         .add-card-button {
             min-width: 60px;
@@ -468,6 +855,10 @@ export default class Holdings extends Vue {
                 }
             }
         }
+    }
+
+    .header-buttons {
+        gap: 0.4rem;
     }
 
     .cards-container {
