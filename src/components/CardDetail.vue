@@ -1,12 +1,5 @@
 <template>
     <div class="card-detail" v-if="card">
-        <div class="detail-header">
-            <h3 class="card-title">{{ card.name || '새 카드' }}</h3>
-            <div class="card-status-badge" :class="`status-${card.status}`">
-                {{ getStatusText(card.status) }}
-            </div>
-        </div>
-
         <div class="detail-form">
             <!-- Basic Information -->
             <div class="form-section">
@@ -238,6 +231,7 @@ export default class CardDetail extends Vue {
         if (confirmed) {
             try {
                 await this.$store.dispatch('save')
+                alert(`${cardName}이(가) 성공적으로 저장되었습니다.`)
                 this.$emit('card-saved', this.card)
             } catch (error) {
                 console.error('Failed to save card:', error)
@@ -254,7 +248,8 @@ export default class CardDetail extends Vue {
         
         if (confirmed) {
             try {
-                await this.$store.commit('delete')
+                await this.$store.dispatch('delete', this.card.id)
+                alert(`${cardName}이(가) 성공적으로 삭제되었습니다.`)
                 this.$emit('card-deleted', this.card)
             } catch (error) {
                 console.error('Failed to delete card:', error)
@@ -276,75 +271,39 @@ export default class CardDetail extends Vue {
     display: flex;
     flex-direction: column;
     height: 100%;
-    background: white;
+    background: #2d2d2d;
     border-radius: 12px;
     overflow: hidden;
 }
 
-.detail-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .card-title {
-        margin: 0;
-        font-size: 1.5rem;
-        font-weight: 600;
-    }
-
-    .card-status-badge {
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-
-        &.status-using {
-            background: rgba(40, 167, 69, 0.9);
-        }
-
-        &.status-keeping {
-            background: rgba(255, 193, 7, 0.9);
-            color: #212529;
-        }
-
-        &.status-terminated {
-            background: rgba(220, 53, 69, 0.9);
-        }
-    }
-}
 
 .detail-form {
     flex: 1;
-    padding: 1.5rem;
+    padding: 1rem;
     overflow-y: auto;
 }
 
 .form-section {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 
     &:last-child {
         margin-bottom: 0;
     }
 
     .section-title {
-        margin: 0 0 1rem 0;
-        font-size: 1.1rem;
+        margin: 0 0 0.75rem 0;
+        font-size: 1rem;
         font-weight: 600;
-        color: #2c3e50;
-        padding-bottom: 0.5rem;
-        border-bottom: 2px solid #e9ecef;
+        color: #e0e0e0;
+        padding-bottom: 0.3rem;
+        border-bottom: 2px solid #404040;
     }
 
     .section-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem;
 
         .section-title {
             margin: 0;
@@ -356,30 +315,31 @@ export default class CardDetail extends Vue {
 
 .form-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
 }
 
 .form-field {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.3rem;
 
     .field-label {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         font-weight: 600;
-        color: #495057;
+        color: #b0b0b0;
         margin: 0;
     }
 
     .field-input,
     .field-select {
-        padding: 0.75rem;
-        border: 2px solid #e9ecef;
-        border-radius: 8px;
-        font-size: 0.9rem;
+        padding: 0.5rem;
+        border: 2px solid #555;
+        border-radius: 6px;
+        font-size: 0.8rem;
         transition: all 0.3s ease;
-        background: white;
+        background: #3a3a3a;
+        color: #e0e0e0;
 
         &:focus {
             outline: none;
@@ -388,7 +348,7 @@ export default class CardDetail extends Vue {
         }
 
         &::placeholder {
-            color: #adb5bd;
+            color: #888;
         }
     }
 
@@ -400,13 +360,13 @@ export default class CardDetail extends Vue {
 .add-button {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
     background: #28a745;
     color: white;
     border: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -414,6 +374,7 @@ export default class CardDetail extends Vue {
     &:hover {
         background: #218838;
         transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
     }
 
     .add-icon {
@@ -425,32 +386,32 @@ export default class CardDetail extends Vue {
 .auto-payments-list {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.75rem;
 }
 
 .payment-item {
     display: flex;
     align-items: flex-end;
-    gap: 1rem;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: #3a3a3a;
+    border-radius: 6px;
+    border: 1px solid #555;
 
     .payment-fields {
         flex: 1;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 1rem;
+        gap: 0.75rem;
     }
 
     .remove-button {
-        width: 40px;
-        height: 40px;
+        width: 32px;
+        height: 32px;
         background: #dc3545;
         color: white;
         border: none;
-        border-radius: 6px;
+        border-radius: 5px;
         cursor: pointer;
         transition: all 0.3s ease;
         display: flex;
@@ -463,7 +424,7 @@ export default class CardDetail extends Vue {
         }
 
         .remove-icon {
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: bold;
         }
     }
@@ -471,17 +432,18 @@ export default class CardDetail extends Vue {
 
 .empty-state {
     text-align: center;
-    padding: 2rem;
-    color: #6c757d;
+    padding: 1.5rem;
+    color: #888;
     font-style: italic;
+    font-size: 0.9rem;
 }
 
 .action-buttons {
     display: flex;
-    gap: 1rem;
-    padding: 1.5rem;
-    background: #f8f9fa;
-    border-top: 1px solid #e9ecef;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: #3a3a3a;
+    border-top: 1px solid #555;
 }
 
 .save-button,
@@ -490,11 +452,11 @@ export default class CardDetail extends Vue {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
+    gap: 0.4rem;
+    padding: 0.6rem 1.2rem;
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;

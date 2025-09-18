@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.7a56063ae4f453a50ce3e9e0c8c34904.js"
+  "precache-manifest.53ac0677c7fb3967af4636f7c3f6ac2a.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "cards-organizer"});

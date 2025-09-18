@@ -3,6 +3,7 @@
         class="calendar-row" 
         :class="[`holder-${card.holder}`, `status-${card.status}`]"
         :style="timelineStyle"
+        @click="selectCard"
     >
         <div class="timeline-bar">
             <div class="date-indicators">
@@ -12,7 +13,6 @@
         </div>
         <div class="card-info">
             <div class="card-name">{{ card.name || '새 카드' }}</div>
-            <div class="card-status">{{ getStatusText(card.status) }}</div>
         </div>
     </div>
 </template>
@@ -99,8 +99,8 @@ export default class CalendarRow extends Vue {
             return { display: 'none' }
         }
 
-        const rowHeight = 60 // 각 행의 높이
-        const rowSpacing = 8 // 행 간격
+        const rowHeight = 24 // 각 행의 높이
+        const rowSpacing = 2 // 행 간격
         const topPosition = this.rowIndex * (rowHeight + rowSpacing)
 
         return {
@@ -120,6 +120,10 @@ export default class CalendarRow extends Vue {
         return statusMap[status] || status
     }
 
+    selectCard(): void {
+        this.$store.commit('selectCard', this.card)
+    }
+
     private isLeapYear(year: number): boolean {
         return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)
     }
@@ -134,9 +138,9 @@ export default class CalendarRow extends Vue {
 <style scoped lang="scss">
 .calendar-row {
     position: absolute;
-    height: 60px;
-    margin: 2px 0;
-    border-radius: 8px;
+    height: 24px;
+    margin: 1px 0;
+    border-radius: 3px;
     overflow: hidden;
     transition: all 0.3s ease;
     cursor: pointer;
@@ -163,18 +167,41 @@ export default class CalendarRow extends Vue {
     .date-indicators {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: 100%;
-        font-size: 0.75rem;
+        height: 100%;
+        font-size: 0.65rem;
         font-weight: 600;
         color: white;
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        position: relative;
 
-        .start-date,
-        .end-date {
-            background: rgba(255, 255, 255, 0.2);
+        .start-date {
+            background: rgba(0, 0, 0, 0.6);
             padding: 2px 6px;
             border-radius: 4px;
             backdrop-filter: blur(4px);
+            position: absolute;
+            left: -8px;
+            top: 40%;
+            transform: translateY(-50%);
+            z-index: 2;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .end-date {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 2px 6px;
+            border-radius: 4px;
+            backdrop-filter: blur(4px);
+            position: absolute;
+            right: 12px;
+            top: 40%;
+            transform: translateY(-50%);
+            z-index: 2;
+            min-width: 20px;
+            text-align: center;
         }
     }
 }
@@ -186,24 +213,18 @@ export default class CalendarRow extends Vue {
     transform: translate(-50%, -50%);
     text-align: center;
     pointer-events: none;
+    z-index: 1;
 
     .card-name {
-        font-size: 0.8rem;
+        font-size: 0.65rem;
         font-weight: 600;
         color: white;
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-        margin-bottom: 2px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 120px;
-    }
-
-    .card-status {
-        font-size: 0.65rem;
-        color: rgba(255, 255, 255, 0.9);
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-        font-weight: 500;
+        max-width: 100px;
+        line-height: 1;
     }
 }
 
@@ -256,47 +277,39 @@ export default class CalendarRow extends Vue {
 // Responsive design
 @media (max-width: 768px) {
     .calendar-row {
-        height: 50px;
+        height: 20px;
     }
 
     .timeline-bar {
-        padding: 0 6px;
+        padding: 0 2px;
 
         .date-indicators {
-            font-size: 0.7rem;
+            font-size: 0.55rem;
 
             .start-date,
             .end-date {
-                padding: 1px 4px;
+                padding: 1px 2px;
             }
         }
     }
 
     .card-info {
         .card-name {
-            font-size: 0.7rem;
-            max-width: 100px;
-        }
-
-        .card-status {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
+            max-width: 80px;
         }
     }
 }
 
 @media (max-width: 480px) {
     .calendar-row {
-        height: 45px;
+        height: 18px;
     }
 
     .card-info {
         .card-name {
-            font-size: 0.65rem;
-            max-width: 80px;
-        }
-
-        .card-status {
-            font-size: 0.55rem;
+            font-size: 0.5rem;
+            max-width: 70px;
         }
     }
 }
