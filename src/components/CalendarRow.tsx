@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card } from '@/types/card';
 import useCardsStore from '@/store';
-import styles from './CalendarRow.module.scss';
 import { CARD_STATUS } from '@/data/constant';
 
 interface CalendarRowProps {
@@ -62,38 +61,79 @@ const CalendarRow: React.FC<CalendarRowProps> = ({ card, year, rowIndex, style }
     const startPoint = getStartPoint();
     const endPoint = getEndPoint();
 
-    const rowHeight = 24;
-    const rowSpacing = 2;
-    const topPosition = rowIndex * (rowHeight + rowSpacing);
-
     const timelineStyle: React.CSSProperties = {
         left: `${startPoint}%`,
         width: `${endPoint - startPoint}%`,
-        top: `${topPosition}px`,
-        ...style
+        ...style // Position top is passed from parent now to avoid recalculating here if needed, or we can keep logic.
+        // Parent Information.tsx passes style={{ top: ... }} so we use it.
     };
 
-    const holderClass = card.holder === 'conan' ? styles.holderConan : styles.holderChaeji;
+    // Style Generation
+    let barColorClass = '';
 
-    let statusClass = '';
-    if (card.status === CARD_STATUS.USING) statusClass = styles.statusUsing;
-    else if (card.status === CARD_STATUS.KEEPING) statusClass = styles.statusKeeping;
-    else if (card.status === CARD_STATUS.TERMINATED) statusClass = styles.statusTerminated;
+    // Base color by Holder
+    if (card.holder === 'conan') {
+        barColorClass = 'bg-gradient-to-r from-indigo-500 to-blue-600 shadow-indigo-500/20';
+    } else {
+        barColorClass = 'bg-gradient-to-r from-rose-500 to-pink-600 shadow-rose-500/20';
+    }
+
+    // Modifications by Status
+    let statusClass = 'opacity-100';
+    let containerClass = '';
+
+    if (card.status === CARD_STATUS.USING) {
+        statusClass = ''; // Default vibrant
+    } else if (card.status === CARD_STATUS.KEEPING) {
+        barColorClass = 'bg-amber-500/80'; // Keeping is standardized to Amber
+        statusClass = 'opacity-90';
+    } else if (card.status === CARD_STATUS.TERMINATED) {
+        barColorClass = 'bg-gray-600';
+        statusClass = 'opacity-50 grayscale';
+        containerClass = 'opacity-60';
+    }
 
     return (
         <div
-            className={`${styles.calendarRow} ${holderClass} ${statusClass}`}
+            className={`absolute h-6 flex items-center group cursor-pointer transition-all duration-200 hover:z-20 hover:scale-y-110 ${containerClass}`}
             style={timelineStyle}
             onClick={() => selectCard(card)}
         >
-            <div className={styles.timelineBar}>
-                <div className={styles.dateIndicators}>
-                    {showStartDate && <span className={styles.startDate}>{startDateString}</span>}
-                    {showEndDate && <span className={styles.endDate}>{endDateString}</span>}
+            {/* The Timeline Bar */}
+            <div className={`
+                relative w-full h-3 rounded-full shadow-lg ${barColorClass} ${statusClass}
+                group-hover:h-4 transition-all duration-200
+            `}>
+                {/* Date Indicators (Tooltips) */}
+                <div className="absolute inset-0 flexjustify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 px-1">
+                    {/* Simplified for clean look - showing dates on hover above/below? 
+                        Let's keep it simple: date text inside if wide enough, or floating?
+                        For now, simple implementation:
+                    */}
                 </div>
+
+                {/* Date Labels floating above/below on hover */}
+                {showStartDate && (
+                    <span className="absolute -left-2 -top-5 text-[10px] bg-black/80 text-white px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-30 pointer-events-none">
+                        {startDate.getMonth() + 1}/{startDate.getDate()}
+                    </span>
+                )}
+                {showEndDate && (
+                    <span className="absolute -right-2 -top-5 text-[10px] bg-black/80 text-white px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-30 pointer-events-none">
+                        {endDate.getMonth() + 1}/{endDate.getDate()}
+                    </span>
+                )}
             </div>
-            <div className={styles.cardInfo}>
-                <div className={styles.cardName}>{card.name || '새 카드'}</div>
+
+            {/* Card Name Label - Always visible or on hover? 
+                Previous design had it always visible next to the bar? 
+                Actually previous design: `cardInfo` inside `calendarRow`.
+            */}
+            {/* Card Name Label - Visible by default */}
+            <div className="absolute left-2 top-1/2 -translate-y-1/2 w-full overflow-hidden pointer-events-none pr-6">
+                <div className="text-[10px] font-bold text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] truncate">
+                    {card.name}
+                </div>
             </div>
         </div>
     );

@@ -2,15 +2,11 @@ import React, { useState, useEffect } from 'react';
 import useCardsStore, { CardsState } from '@/store';
 import { Card } from '@/types/card';
 import { CARD_STATUS } from '@/data/constant';
-import styles from './Information.module.scss';
 import CalendarRow from './CalendarRow';
-import CardDetail from './CardDetail';
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Calendar as CalendarIcon } from 'lucide-react';
 
 const Information: React.FC = () => {
     const cards = useCardsStore((state: CardsState) => state.cards);
-    const selectedCard = useCardsStore((state: CardsState) => state.selectedCard);
-    const resetSelection = useCardsStore((state: CardsState) => state.resetSelection);
 
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
     const [isMobile, setIsMobile] = useState(false);
@@ -77,62 +73,66 @@ const Information: React.FC = () => {
     const nextYear = () => {
         if (currentYear < maxYear) setCurrentYear(prev => prev + 1);
     };
-
-    const getStatusText = (status: string) => {
-        const statusMap: Record<string, string> = {
-            [CARD_STATUS.USING]: '사용중',
-            [CARD_STATUS.KEEPING]: '보관중',
-            [CARD_STATUS.TERMINATED]: '해지됨'
-        };
-        return statusMap[status] || status;
-    };
-
     return (
-        <div className={styles.information}>
-            <div className={styles.informationContent}>
-                <section className={styles.calendarSection}>
-                    <header className={styles.sectionHeader}>
-                        <h2 className={styles.sectionTitle}>카드 보유 기간</h2>
-                        <div className={styles.yearNavigation}>
-                            <button
-                                className={styles.navButton}
-                                onClick={previousYear}
-                                disabled={currentYear <= minYear}
-                            >
-                                <ChevronLeft size={20} />
-                            </button>
-                            <span className={styles.currentYear}>{currentYear}</span>
-                            <button
-                                className={styles.navButton}
-                                onClick={nextYear}
-                                disabled={currentYear >= maxYear}
-                            >
-                                <ChevronRight size={20} />
-                            </button>
-                        </div>
-                    </header>
+        <div className="h-full flex flex-col bg-white/5 lg:bg-transparent">
+            <section className="flex-1 flex flex-col overflow-hidden">
+                <header className="px-6 py-5 border-b border-white/5 flex items-center justify-between bg-black/20 backdrop-blur-sm">
+                    <h2 className="text-lg font-semibold text-white/90 flex items-center gap-2">
+                        <CalendarIcon size={18} className="text-indigo-400" />
+                        카드 보유 기간
+                    </h2>
+                    <div className="flex items-center gap-4 bg-black/40 rounded-xl p-1 border border-white/5">
+                        <button
+                            className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-colors disabled:opacity-30 disabled:hover:bg-transparent"
+                            onClick={previousYear}
+                            disabled={currentYear <= minYear}
+                        >
+                            <ChevronLeft size={18} />
+                        </button>
+                        <span className="text-sm font-bold text-white min-w-[3rem] text-center">{currentYear}</span>
+                        <button
+                            className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-colors disabled:opacity-30 disabled:hover:bg-transparent"
+                            onClick={nextYear}
+                            disabled={currentYear >= maxYear}
+                        >
+                            <ChevronRight size={18} />
+                        </button>
+                    </div>
+                </header>
 
-                    <div className={styles.calendarContainer}>
-                        {/* Month Headers */}
-                        <div className={styles.monthHeaders}>
+                <div className="flex-1 flex flex-col overflow-hidden relative">
+                    {/* Horizontal Scroll Hint for Mobile */}
+                    {isMobile && (
+                        <div className="px-6 py-2 bg-indigo-500/5 flex items-center justify-center gap-2 border-b border-white/5 animate-pulse">
+                            <div className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+                            <span className="text-[10px] text-indigo-300 font-medium uppercase tracking-widest">
+                                좌우로 스크롤하여 타임라인을 확인하세요
+                            </span>
+                            <div className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+                        </div>
+                    )}
+
+                    {/* Timeline Container - Scrollable both ways */}
+                    <div className="flex-1 overflow-auto custom-scrollbar relative bg-gradient-to-br from-transparent to-black/20 pb-20 sm:pb-0">
+                        {/* Month Headers - Sticky at the top of the scrollable area */}
+                        <div className="grid grid-cols-12 border-b border-white/5 bg-black/40 backdrop-blur-md sticky top-0 z-20 min-w-[800px]">
                             {monthNames.map((month, index) => (
-                                <div key={index} className={styles.monthHeader}>
+                                <div key={index} className="py-3 text-[10px] sm:text-xs text-center font-medium text-gray-500 border-r last:border-r-0 border-white/5">
                                     {month}
                                 </div>
                             ))}
                         </div>
 
-                        {/* Calendar Timeline */}
-                        <div className={styles.timelineContainer} style={{ height: timelineHeight }}>
-                            <div className={styles.timelineGrid}>
+                        {/* Relative wrapper for grid and bars to ensure they share the same min-width */}
+                        <div className="relative min-w-[800px]" style={{ height: timelineHeight }}>
+                            {/* Vertical Grid Lines */}
+                            <div className="absolute inset-0 grid grid-cols-12 pointer-events-none h-full z-0">
                                 {Array.from({ length: 12 }).map((_, index) => (
-                                    <div key={index} className={styles.monthColumn}>
-                                        {index !== 0 && <div className={styles.monthDivider}></div>}
-                                    </div>
+                                    <div key={index} className="h-full border-r last:border-r-0 border-white/5" />
                                 ))}
                             </div>
 
-                            <div className={styles.cardsTimeline}>
+                            <div className="relative z-10 w-full h-full">
                                 {((): React.ReactNode => {
                                     let currentTop = 0;
                                     const rowHeight = 24;
@@ -147,10 +147,13 @@ const Information: React.FC = () => {
                                             dividerElement = (
                                                 <div
                                                     key={`divider-${card.holder}-${index}`}
-                                                    className={`${styles.userDivider} ${card.holder === 'conan' ? styles.dividerConan : styles.dividerChaeji}`}
+                                                    className={`
+                                                    absolute left-0 right-0 h-[30px] flex items-center px-4 border-b border-white/5
+                                                    ${card.holder === 'conan' ? 'bg-indigo-900/10 text-indigo-300' : 'bg-rose-900/10 text-rose-300'}
+                                                `}
                                                     style={{ top: `${currentTop}px` }}
                                                 >
-                                                    <span className={styles.dividerLabel}>
+                                                    <span className="text-[10px] font-black uppercase tracking-[0.2em]">
                                                         {card.holder === 'conan' ? 'Conan' : 'Chaeji'}
                                                     </span>
                                                 </div>
@@ -181,30 +184,8 @@ const Information: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                </section>
-            </div>
-
-            {/* Card Detail Modal Popup */}
-            {selectedCard && (
-                <div className={styles.modalOverlay} onClick={resetSelection}>
-                    <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
-                        <div className={styles.modalHeader}>
-                            <div className={styles.modalTitleSection}>
-                                <h3 className={styles.modalTitle}>{selectedCard.name || '새 카드'}</h3>
-                                <div className={`${styles.modalStatusBadge} ${styles[`status${selectedCard.status.charAt(0).toUpperCase() + selectedCard.status.slice(1)}`]}`}>
-                                    {getStatusText(selectedCard.status)}
-                                </div>
-                            </div>
-                            <button className={styles.modalCloseButton} onClick={resetSelection}>
-                                <X size={20} />
-                            </button>
-                        </div>
-                        <div className={styles.modalBody}>
-                            <CardDetail />
-                        </div>
-                    </div>
                 </div>
-            )}
+            </section>
         </div>
     );
 };
