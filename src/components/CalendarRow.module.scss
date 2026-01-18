@@ -2,16 +2,16 @@
     position: absolute;
     height: 24px;
     margin: 1px 0;
-    border-radius: 3px;
-    overflow: hidden;
-    transition: all 0.3s ease;
+    border-radius: var(--radius-sm);
+    /* overflow hidden clips shadows, careful. 
+       Actually, if we want bar shadows, better not clip parent or add shadow to bar. */
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
     cursor: pointer;
     z-index: 1;
 
     &:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        z-index: 10;
+        transform: translateY(-2px) scaleY(1.1);
+        z-index: 100 !important;
     }
 }
 
@@ -22,9 +22,15 @@
     display: flex;
     align-items: center;
     padding: 0 8px;
-    border-radius: 8px;
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
+    border-radius: 12px;
+    /* Pill shape usually looks better for timelines */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    .calendarRow:hover & {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
 }
 
 .dateIndicators {
@@ -33,39 +39,49 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    font-size: 0.65rem;
-    font-weight: 600;
+    /* Hide dates by default to reduce clutter, show on hover? 
+       Or keep mostly small. 
+       Let's keep them small/hidden usually unless zoomed or wide. */
+    opacity: 0;
+    transition: opacity 0.2s;
+
+    .calendarRow:hover & {
+        opacity: 1;
+    }
+}
+
+.startDate,
+.endDate {
+    background: rgba(0, 0, 0, 0.8);
     color: white;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    position: relative;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    position: absolute;
+    top: -25px;
+    /* Tooltip style above */
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 4px 4px 0;
+        border-style: solid;
+        border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+    }
 }
 
 .startDate {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 2px 6px;
-    border-radius: 4px;
-    backdrop-filter: blur(4px);
-    position: absolute;
-    left: -8px;
-    top: 40%;
-    transform: translateY(-50%);
-    z-index: 2;
-    min-width: 20px;
-    text-align: center;
+    left: 0;
 }
 
 .endDate {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 2px 6px;
-    border-radius: 4px;
-    backdrop-filter: blur(4px);
-    position: absolute;
-    right: 12px;
-    top: 40%;
-    transform: translateY(-50%);
-    z-index: 2;
-    min-width: 20px;
-    text-align: center;
+    right: 0;
 }
 
 .cardInfo {
@@ -75,55 +91,52 @@
     transform: translate(-50%, -50%);
     text-align: center;
     pointer-events: none;
-    z-index: 1;
+    z-index: 2;
+    width: 100%;
+    padding: 0 4px;
 }
 
 .cardName {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     font-weight: 600;
     color: white;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 100px;
-    line-height: 1;
+    display: block;
 }
 
 /* User Specific */
 .holderConan .timelineBar {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-color: #5a6fd8;
-
-    &:hover {
-        background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
-        border-color: #4c63d2;
-    }
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-color: rgba(160, 180, 255, 0.3);
 }
 
 .holderChaeji .timelineBar {
-    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-    border-color: #d63031;
-
-    &:hover {
-        background: linear-gradient(135deg, #d63031 0%, #a93226 100%);
-        border-color: #c23616;
-    }
+    background: linear-gradient(90deg, #ff758c 0%, #ff7eb3 100%);
+    border-color: rgba(255, 200, 200, 0.3);
 }
 
 /* Status Specific */
 .statusUsing .timelineBar {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    /* Standard pill, no extra styles needed */
 }
 
 .statusKeeping .timelineBar {
-    opacity: 0.8;
-    border-style: dashed;
+    opacity: 0.7;
+    background: repeating-linear-gradient(45deg,
+            rgba(255, 193, 7, 0.2),
+            rgba(255, 193, 7, 0.2) 10px,
+            rgba(255, 193, 7, 0.4) 10px,
+            rgba(255, 193, 7, 0.4) 20px);
+    border: 1px dashed rgba(255, 193, 7, 0.5);
 }
 
 .statusTerminated .timelineBar {
-    opacity: 0.6;
-    filter: grayscale(0.3);
+    opacity: 0.5;
+    filter: grayscale(0.6);
+    background: #444;
 }
 
 @media (max-width: 768px) {
@@ -131,32 +144,9 @@
         height: 20px;
     }
 
-    .timelineBar {
-        padding: 0 2px;
-    }
-
-    .dateIndicators {
-        font-size: 0.55rem;
-    }
-
-    .startDate,
-    .endDate {
-        padding: 1px 2px;
-    }
-
     .cardName {
-        font-size: 0.55rem;
-        max-width: 80px;
-    }
-}
-
-@media (max-width: 480px) {
-    .calendarRow {
-        height: 18px;
+        font-size: 0.6rem;
     }
 
-    .cardName {
-        font-size: 0.5rem;
-        max-width: 70px;
-    }
+    /* Touch targets check? 20px is small but it is a timeline. */
 }

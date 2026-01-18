@@ -2,33 +2,47 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: #2d2d2d;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
     overflow: hidden;
     padding: 1.5rem;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    /* Subtle top gradient */
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100px;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.03), transparent);
+        pointer-events: none;
+    }
 }
 
 .informationContent {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
     height: 100%;
+    z-index: 1;
 }
 
 .sectionHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     padding-bottom: 1rem;
-    border-bottom: 2px solid #404040;
 
     .sectionTitle {
         margin: 0;
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         font-weight: 600;
-        color: #e0e0e0;
+        color: var(--text-primary);
     }
 }
 
@@ -37,9 +51,10 @@
     display: flex;
     flex-direction: column;
     min-height: 0;
-    background: #3a3a3a;
-    border-radius: 8px;
-    padding: 1rem;
+    /* Remove inner background to let parent surface show */
+    /* background: #3a3a3a; */
+    border-radius: var(--radius-md);
+    /* padding: 1rem; */
 }
 
 .yearNavigation {
@@ -48,40 +63,39 @@
     gap: 1rem;
 
     .navButton {
-        background: #4a4a4a;
-        color: #e0e0e0;
-        border: 2px solid #666;
-        border-radius: 8px;
-        width: 40px;
-        height: 40px;
+        background: var(--bg-surface-elevated);
+        color: var(--text-secondary);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-sm);
+        width: 36px;
+        height: 36px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        transition: all 0.3s ease;
-        font-size: 1.2rem;
-        font-weight: bold;
+        transition: all 0.2s ease;
+        font-size: 1.1rem;
 
         &:hover:not(:disabled) {
-            background: #5a5a5a;
-            border-color: #777;
-            transform: scale(1.05);
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
         }
 
         &:disabled {
-            background: #3a3a3a;
-            border-color: #555;
+            opacity: 0.3;
             cursor: not-allowed;
-            opacity: 0.6;
         }
     }
 
     .currentYear {
         font-size: 1.5rem;
-        font-weight: 600;
-        color: #e0e0e0;
+        font-weight: 700;
+        color: var(--text-primary);
         min-width: 80px;
         text-align: center;
+        font-variant-numeric: tabular-nums;
     }
 }
 
@@ -89,25 +103,27 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    background: #3a3a3a;
-    border-radius: 12px;
-    border: 1px solid #555;
+    background: var(--bg-surface-elevated);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     overflow: hidden;
+    margin-top: 1rem;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .monthHeaders {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    background: #4a4a4a;
-    border-bottom: 2px solid #666;
+    background: rgba(30, 30, 30, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
     .monthHeader {
-        padding: 1rem 0.5rem;
+        padding: 0.75rem 0.25rem;
         text-align: center;
-        font-weight: 600;
-        color: #e0e0e0;
-        font-size: 0.9rem;
-        border-right: 1px solid #666;
+        font-weight: 500;
+        color: var(--text-tertiary);
+        font-size: 0.8rem;
+        border-right: 1px solid rgba(255, 255, 255, 0.02);
 
         &:last-child {
             border-right: none;
@@ -120,14 +136,30 @@
     position: relative;
     overflow-x: auto;
     overflow-y: auto;
+
+    /* Custom Scrollbar for timeline */
+    &::-webkit-scrollbar {
+        height: 8px;
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+    }
 }
 
 .cardsTimeline {
     position: relative;
     z-index: 1;
-    padding: 1rem 0;
+    padding: 1rem 0 3rem 0;
     min-height: 100%;
-    padding-bottom: 2rem;
+    min-width: 800px;
+    /* Trigger scroll on small screens */
 }
 
 .timelineGrid {
@@ -139,10 +171,12 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     pointer-events: none;
+    min-width: 800px;
+    /* Match scroll width */
 
     .monthColumn {
         position: relative;
-        border-right: 1px solid rgba(233, 236, 239, 0.5);
+        border-right: 1px dashed rgba(255, 255, 255, 0.03);
 
         &:last-child {
             border-right: none;
@@ -153,12 +187,8 @@
             top: 0;
             bottom: 0;
             left: 0;
-            width: 2px;
-            background: linear-gradient(to bottom,
-                    transparent 0%,
-                    rgba(167, 157, 157, 0.3) 10%,
-                    rgba(167, 157, 157, 0.3) 90%,
-                    transparent 100%);
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.05), transparent);
         }
     }
 }
@@ -171,71 +201,42 @@
     display: flex;
     align-items: center;
     padding: 0 1rem;
-    font-weight: 600;
-    font-size: 0.9rem;
     z-index: 5;
     margin: 0;
 
-    .dividerLabel {
-        background: white;
-        padding: 0.25rem 0.75rem;
-        border-radius: 12px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        border: 2px solid;
+    /* A horizontal line behind the badge */
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.05);
+        z-index: -1;
     }
-
-    &.dividerConan {
-        .dividerLabel {
-            color: #667eea;
-            border-color: #667eea;
-            background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
-        }
-    }
-
-    &.dividerChaeji {
-        .dividerLabel {
-            color: #e74c3c;
-            border-color: #e74c3c;
-            background: linear-gradient(135deg, #ffebee, #fce4ec);
-        }
-    }
-}
-
-.userDivider {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    padding: 0 1rem;
-    font-weight: 600;
-    font-size: 0.9rem;
-    z-index: 5;
-    margin: 0;
 
     .dividerLabel {
-        background: white;
-        padding: 0.25rem 0.75rem;
-        border-radius: 12px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        border: 2px solid;
+        padding: 0.25rem 1rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid;
     }
 
-    &.dividerConan {
-        .dividerLabel {
-            color: #667eea;
-            border-color: #667eea;
-            background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
-        }
+    &.dividerConan .dividerLabel {
+        background: rgba(102, 126, 234, 0.1);
+        color: #8da4f7;
+        border-color: rgba(102, 126, 234, 0.3);
     }
 
-    &.dividerChaeji {
-        .dividerLabel {
-            color: #e74c3c;
-            border-color: #e74c3c;
-            background: linear-gradient(135deg, #ffebee, #fce4ec);
-        }
+    &.dividerChaeji .dividerLabel {
+        background: rgba(231, 76, 60, 0.1);
+        color: #ff8a80;
+        border-color: rgba(231, 76, 60, 0.3);
     }
 }
 
@@ -246,31 +247,32 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    backdrop-filter: blur(4px);
 }
 
 .modalContent {
-    background: #2d2d2d;
-    border-radius: 12px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    background: #1e1e1e;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     max-width: 90vw;
     max-height: 90vh;
-    width: 800px;
+    width: 600px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    animation: modalSlideIn 0.3s ease-out;
+    animation: modalSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 @keyframes modalSlideIn {
     from {
         opacity: 0;
-        transform: scale(0.9) translateY(-20px);
+        transform: scale(0.95) translateY(10px);
     }
 
     to {
@@ -280,13 +282,12 @@
 }
 
 .modalHeader {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 1rem 1.5rem;
+    background: var(--bg-surface-elevated);
+    padding: 1.25rem 1.5rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #e9ecef;
+    align-items: flex-start;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
     .modalTitleSection {
         display: flex;
@@ -296,50 +297,51 @@
 
     .modalTitle {
         margin: 0;
-        font-size: 1.3rem;
+        font-size: 1.25rem;
         font-weight: 600;
+        color: var(--text-primary);
     }
 
     .modalStatusBadge {
-        padding: 0.2rem 0.6rem;
-        border-radius: 12px;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
         font-size: 0.7rem;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.3px;
+        letter-spacing: 0.5px;
         align-self: flex-start;
     }
 
     .statusUsing {
-        background: rgba(40, 167, 69, 0.9);
+        background: rgba(40, 167, 69, 0.15);
+        color: #4cd175;
     }
 
     .statusKeeping {
-        background: rgba(255, 193, 7, 0.9);
-        color: #212529;
+        background: rgba(255, 193, 7, 0.15);
+        color: #ffd54f;
     }
 
     .statusTerminated {
-        background: rgba(220, 53, 69, 0.9);
+        background: rgba(220, 53, 69, 0.15);
+        color: #ff6b6b;
     }
 
     .modalCloseButton {
-        background: none;
+        background: transparent;
         border: none;
-        color: white;
-        font-size: 1.5rem;
+        color: var(--text-secondary);
         cursor: pointer;
-        padding: 0.25rem;
-        border-radius: 4px;
-        transition: background-color 0.2s ease;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: all 0.2s;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 32px;
-        height: 32px;
 
         &:hover {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
         }
     }
 }
@@ -347,80 +349,39 @@
 .modalBody {
     flex: 1;
     overflow-y: auto;
-    max-height: calc(90vh - 80px);
-    background: #2d2d2d;
+    padding: 1.5rem;
+    background: var(--bg-surface);
 }
 
 @media (max-width: 1024px) {
-    .informationContent {
-        gap: 1.5rem;
-    }
-
-    .sectionHeader {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-
-        .yearNavigation {
-            align-self: center;
-        }
-    }
-
-    .monthHeaders {
-        .monthHeader {
-            padding: 0.75rem 0.25rem;
-            font-size: 0.8rem;
-        }
+    .monthHeaders .monthHeader {
+        font-size: 0.7rem;
+        padding: 0.5rem 0.1rem;
     }
 }
 
 @media (max-width: 768px) {
-    .yearNavigation {
-        .navButton {
-            width: 35px;
-            height: 35px;
-            font-size: 1rem;
-        }
-
-        .currentYear {
-            font-size: 1.2rem;
-            min-width: 60px;
-        }
+    .information {
+        padding: 1rem;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
     }
 
-    .monthHeaders {
-        .monthHeader {
-            padding: 0.5rem 0.1rem;
-            font-size: 0.7rem;
-        }
+    .calendarContainer {
+        border-radius: var(--radius-md);
+    }
+
+    .currentYear {
+        font-size: 1.2rem;
     }
 
     .modalContent {
-        width: 95vw;
-        max-height: 95vh;
-        margin: 1rem;
-    }
-
-    .modalHeader {
-        padding: 0.75rem 1rem;
-
-        .modalTitle {
-            font-size: 1.1rem;
-        }
-
-        .modalStatusBadge {
-            font-size: 0.65rem;
-            padding: 0.15rem 0.5rem;
-        }
-
-        .modalCloseButton {
-            width: 28px;
-            height: 28px;
-            font-size: 1.3rem;
-        }
-    }
-
-    .modalBody {
-        max-height: calc(95vh - 70px);
+        width: 100vw;
+        height: 100vh;
+        max-height: 100vh;
+        max-width: 100vw;
+        border-radius: 0;
     }
 }
