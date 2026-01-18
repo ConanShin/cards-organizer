@@ -43,7 +43,6 @@
     "asynckit": "^0.4.0",
     "at-least-node": "^1.0.0",
     "atob": "^2.1.2",
-    "autoprefixer": "^9.8.6",
     "aws-sign2": "^0.7.0",
     "aws4": "^1.11.0",
     "axios": "^0.21.4",
@@ -535,7 +534,6 @@
     "pnp-webpack-plugin": "^1.6.4",
     "portfinder": "^1.0.28",
     "posix-character-classes": "^0.1.1",
-    "postcss": "^7.0.35",
     "postcss-calc": "^7.0.5",
     "postcss-colormin": "^4.0.3",
     "postcss-convert-values": "^4.0.1",
@@ -840,9 +838,13 @@
   },
   "homepage": "https://github.com/ConanShin/cards-organizer#readme",
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
     "@types/node": "^25.0.9",
     "@types/react": "^19.2.8",
     "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10.4.23",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3"
   }
 }
