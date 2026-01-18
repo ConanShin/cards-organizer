@@ -237,6 +237,128 @@
   color: #fff;
 }
 
+.Holdings-module-scss-module__0su9yW__searchResults {
+  z-index: 1000;
+  background: var(--bg-surface-elevated);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid #ffffff1a;
+  margin-top: .5rem;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.Holdings-module-scss-module__0su9yW__searchResultsHeader {
+  background: #ffffff05;
+  border-bottom: 1px solid #ffffff0d;
+  justify-content: space-between;
+  align-items: center;
+  padding: .75rem 1rem;
+  display: flex;
+}
+
+.Holdings-module-scss-module__0su9yW__searchResultsTitle {
+  color: var(--primary);
+  margin: 0;
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.Holdings-module-scss-module__0su9yW__closeSearchResult {
+  color: var(--text-secondary);
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  padding: .25rem;
+  transition: all .2s;
+  display: flex;
+}
+
+.Holdings-module-scss-module__0su9yW__closeSearchResult:hover {
+  color: var(--text-primary);
+  background: #ffffff1a;
+}
+
+.Holdings-module-scss-module__0su9yW__searchResultsContent {
+  max-height: 400px;
+  padding: .5rem;
+  overflow-y: auto;
+}
+
+.Holdings-module-scss-module__0su9yW__userSearchResult {
+  margin-bottom: 1rem;
+}
+
+.Holdings-module-scss-module__0su9yW__userSearchResult:last-child {
+  margin-bottom: 0;
+}
+
+.Holdings-module-scss-module__0su9yW__userHeader {
+  padding: .5rem .5rem .25rem;
+}
+
+.Holdings-module-scss-module__0su9yW__userName {
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin: 0;
+  font-size: .8rem;
+  font-weight: 600;
+}
+
+.Holdings-module-scss-module__0su9yW__searchResultItem {
+  background: var(--bg-surface);
+  border-radius: var(--radius-sm);
+  border: 1px solid #ffffff0d;
+  margin-top: .5rem;
+  padding: .75rem;
+  transition: all .2s;
+}
+
+.Holdings-module-scss-module__0su9yW__searchResultItem:hover {
+  background: #ffffff0d;
+  transform: translateY(-1px);
+}
+
+.Holdings-module-scss-module__0su9yW__cardInfo {
+  margin-bottom: .4rem;
+}
+
+.Holdings-module-scss-module__0su9yW__cardName {
+  color: var(--text-primary);
+  font-size: .95rem;
+  font-weight: 500;
+}
+
+.Holdings-module-scss-module__0su9yW__statusInfo {
+  align-items: center;
+  gap: .5rem;
+  font-size: .8rem;
+  display: flex;
+}
+
+.Holdings-module-scss-module__0su9yW__terminatedInfo {
+  color: var(--status-terminated);
+}
+
+.Holdings-module-scss-module__0su9yW__usingInfo {
+  color: var(--status-using);
+}
+
+.Holdings-module-scss-module__0su9yW__terminationDate, .Holdings-module-scss-module__0su9yW__endDate {
+  color: var(--text-secondary);
+  margin-left: .25rem;
+  font-weight: 500;
+}
+
 .Holdings-module-scss-module__0su9yW__headerButtons {
   flex-wrap: wrap;
   gap: 1rem;

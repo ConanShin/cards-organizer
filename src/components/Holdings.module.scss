@@ -105,6 +105,128 @@
     }
 }
 
+.searchResults {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--bg-surface-elevated);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    margin-top: 0.5rem;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+}
+
+.searchResultsHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.searchResultsTitle {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.closeSearchResult {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text-primary);
+    }
+}
+
+.searchResultsContent {
+    padding: 0.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.userSearchResult {
+    margin-bottom: 1rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.userHeader {
+    padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+}
+
+.userName {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.searchResultItem {
+    padding: 0.75rem;
+    background: var(--bg-surface);
+    border-radius: var(--radius-sm);
+    margin-top: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.05);
+        transform: translateY(-1px);
+    }
+}
+
+.cardInfo {
+    margin-bottom: 0.4rem;
+}
+
+.cardName {
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.statusInfo {
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.terminatedInfo {
+    color: var(--status-terminated);
+}
+
+.usingInfo {
+    color: var(--status-using);
+}
+
+.terminationDate,
+.endDate {
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-left: 0.25rem;
+}
+
 .headerButtons {
     display: flex;
     gap: 1rem;
