@@ -1,0 +1,255 @@
+/* [project]/src/components/CardDetail.module.scss.module.css [app-client] (css) */
+.CardDetail-module-scss-module__mqI1bW__cardDetail {
+  background: #2d2d2d;
+  border-radius: 12px;
+  flex-direction: column;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+.CardDetail-module-scss-module__mqI1bW__detailForm {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.CardDetail-module-scss-module__mqI1bW__formSection {
+  margin-bottom: 1.5rem;
+}
+
+.CardDetail-module-scss-module__mqI1bW__formSection:last-child {
+  margin-bottom: 0;
+}
+
+.CardDetail-module-scss-module__mqI1bW__sectionTitle {
+  color: #e0e0e0;
+  border-bottom: 2px solid #404040;
+  margin: 0 0 .75rem;
+  padding-bottom: .3rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.CardDetail-module-scss-module__mqI1bW__sectionHeader {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .75rem;
+  display: flex;
+}
+
+.CardDetail-module-scss-module__mqI1bW__sectionHeader .CardDetail-module-scss-module__mqI1bW__sectionTitle {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.CardDetail-module-scss-module__mqI1bW__formGrid {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: .75rem;
+  display: grid;
+}
+
+.CardDetail-module-scss-module__mqI1bW__formField {
+  flex-direction: column;
+  gap: .3rem;
+  display: flex;
+}
+
+.CardDetail-module-scss-module__mqI1bW__fieldLabel {
+  color: #b0b0b0;
+  margin: 0;
+  font-size: .8rem;
+  font-weight: 600;
+}
+
+.CardDetail-module-scss-module__mqI1bW__fieldInput, .CardDetail-module-scss-module__mqI1bW__fieldSelect {
+  color: #e0e0e0;
+  background: #3a3a3a;
+  border: 2px solid #555;
+  border-radius: 6px;
+  padding: .5rem;
+  font-size: .8rem;
+  transition: all .3s;
+}
+
+.CardDetail-module-scss-module__mqI1bW__fieldInput:focus, .CardDetail-module-scss-module__mqI1bW__fieldSelect:focus {
+  border-color: #667eea;
+  outline: none;
+  box-shadow: 0 0 0 3px #667eea1a;
+}
+
+.CardDetail-module-scss-module__mqI1bW__fieldInput::placeholder, .CardDetail-module-scss-module__mqI1bW__fieldSelect::placeholder {
+  color: #888;
+}
+
+.CardDetail-module-scss-module__mqI1bW__fieldSelect {
+  cursor: pointer;
+}
+
+.CardDetail-module-scss-module__mqI1bW__addButton {
+  color: #fff;
+  cursor: pointer;
+  background: #28a745;
+  border: none;
+  border-radius: 5px;
+  align-items: center;
+  gap: .4rem;
+  padding: .4rem .8rem;
+  font-size: .8rem;
+  font-weight: 500;
+  transition: all .3s;
+  display: flex;
+}
+
+.CardDetail-module-scss-module__mqI1bW__addButton:hover {
+  background: #218838;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px #28a7454d;
+}
+
+.CardDetail-module-scss-module__mqI1bW__addIcon {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.CardDetail-module-scss-module__mqI1bW__autoPaymentsList {
+  flex-direction: column;
+  gap: .75rem;
+  display: flex;
+}
+
+.CardDetail-module-scss-module__mqI1bW__paymentItem {
+  background: #3a3a3a;
+  border: 1px solid #555;
+  border-radius: 6px;
+  align-items: flex-end;
+  gap: .75rem;
+  padding: .75rem;
+  display: flex;
+}
+
+.CardDetail-module-scss-module__mqI1bW__paymentFields {
+  flex: 1;
+  grid-template-columns: 1fr 1fr;
+  gap: .75rem;
+  display: grid;
+}
+
+.CardDetail-module-scss-module__mqI1bW__removeButton {
+  color: #fff;
+  cursor: pointer;
+  background: #dc3545;
+  border: none;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  transition: all .3s;
+  display: flex;
+}
+
+.CardDetail-module-scss-module__mqI1bW__removeButton:hover {
+  background: #c82333;
+  transform: scale(1.05);
+}
+
+.CardDetail-module-scss-module__mqI1bW__removeIcon {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.CardDetail-module-scss-module__mqI1bW__emptyState {
+  text-align: center;
+  color: #888;
+  padding: 1.5rem;
+  font-size: .9rem;
+  font-style: italic;
+}
+
+.CardDetail-module-scss-module__mqI1bW__actionButtons {
+  background: #3a3a3a;
+  border-top: 1px solid #555;
+  gap: .75rem;
+  padding: 1rem;
+  display: flex;
+}
+
+.CardDetail-module-scss-module__mqI1bW__saveButton, .CardDetail-module-scss-module__mqI1bW__deleteButton {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  gap: .4rem;
+  padding: .6rem 1.2rem;
+  font-size: .9rem;
+  font-weight: 600;
+  transition: all .3s;
+  display: flex;
+}
+
+.CardDetail-module-scss-module__mqI1bW__saveButton:disabled, .CardDetail-module-scss-module__mqI1bW__deleteButton:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.CardDetail-module-scss-module__mqI1bW__saveButton {
+  color: #fff;
+  background: #007bff;
+}
+
+.CardDetail-module-scss-module__mqI1bW__saveButton:hover:not(:disabled) {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.CardDetail-module-scss-module__mqI1bW__deleteButton {
+  color: #fff;
+  background: #dc3545;
+}
+
+.CardDetail-module-scss-module__mqI1bW__deleteButton:hover:not(:disabled) {
+  background: #c82333;
+  transform: translateY(-1px);
+}
+
+.CardDetail-module-scss-module__mqI1bW__saveIcon, .CardDetail-module-scss-module__mqI1bW__deleteIcon {
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .CardDetail-module-scss-module__mqI1bW__detailForm {
+    padding: 1rem;
+  }
+
+  .CardDetail-module-scss-module__mqI1bW__formGrid {
+    grid-template-columns: 1fr;
+    gap: .75rem;
+  }
+
+  .CardDetail-module-scss-module__mqI1bW__paymentItem {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .CardDetail-module-scss-module__mqI1bW__paymentFields {
+    grid-template-columns: 1fr;
+  }
+
+  .CardDetail-module-scss-module__mqI1bW__removeButton {
+    align-self: flex-end;
+    width: auto;
+    padding: .5rem 1rem;
+  }
+
+  .CardDetail-module-scss-module__mqI1bW__actionButtons {
+    flex-direction: column;
+    gap: .75rem;
+  }
+}
+
+/*# sourceMappingURL=src_components_CardDetail_module_scss_module_css_bad6b30c._.single.css.map*/

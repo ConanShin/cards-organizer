@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///Users/1112846/workspace/98.study/cards-organizer/src/styles/globals.css"],"sourcesContent":[":root {\n  --background: #2d2d2d;\n  --foreground: #e0e0e0;\n  \n  --primary-blue: #007bff;\n  --primary-blue-hover: #0056b3;\n  \n  --status-using: #28a745;\n  --status-keeping: #ffc107;\n  --status-terminated: #dc3545;\n\n  --user-conan-bg: #4a5a8a;\n  --user-chaeji-bg: #b83a2a;\n}\n\nbody {\n  margin: 0;\n  padding: 0;\n  background-color: var(--background);\n  color: var(--foreground);\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;\n}\n\n* {\n  box-sizing: border-box;\n}\n\na {\n  color: inherit;\n  text-decoration: none;\n}\n\n/* Scrollbar Styling */\n::-webkit-scrollbar {\n  width: 8px;\n  height: 8px;\n}\n\n::-webkit-scrollbar-track {\n  background: #2d2d2d;\n}\n\n::-webkit-scrollbar-thumb {\n  background: #555;\n  border-radius: 4px;\n}\n\n::-webkit-scrollbar-thumb:hover {\n  background: #777;\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;;;;;AAeA;;;;;;;;AAQA;;;;AAIA;;;;;AAMA;;;;;AAKA;;;;AAIA;;;;;AAKA"}}]
+}

@@ -1,0 +1,162 @@
+.calendarRow {
+    position: absolute;
+    height: 24px;
+    margin: 1px 0;
+    border-radius: 3px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    z-index: 1;
+
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 10;
+    }
+}
+
+.timelineBar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.dateIndicators {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.startDate {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2px 6px;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    position: absolute;
+    left: -8px;
+    top: 40%;
+    transform: translateY(-50%);
+    z-index: 2;
+    min-width: 20px;
+    text-align: center;
+}
+
+.endDate {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2px 6px;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    position: absolute;
+    right: 12px;
+    top: 40%;
+    transform: translateY(-50%);
+    z-index: 2;
+    min-width: 20px;
+    text-align: center;
+}
+
+.cardInfo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.cardName {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+    line-height: 1;
+}
+
+/* User Specific */
+.holderConan .timelineBar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #5a6fd8;
+
+    &:hover {
+        background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+        border-color: #4c63d2;
+    }
+}
+
+.holderChaeji .timelineBar {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    border-color: #d63031;
+
+    &:hover {
+        background: linear-gradient(135deg, #d63031 0%, #a93226 100%);
+        border-color: #c23616;
+    }
+}
+
+/* Status Specific */
+.statusUsing .timelineBar {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.statusKeeping .timelineBar {
+    opacity: 0.8;
+    border-style: dashed;
+}
+
+.statusTerminated .timelineBar {
+    opacity: 0.6;
+    filter: grayscale(0.3);
+}
+
+@media (max-width: 768px) {
+    .calendarRow {
+        height: 20px;
+    }
+
+    .timelineBar {
+        padding: 0 2px;
+    }
+
+    .dateIndicators {
+        font-size: 0.55rem;
+    }
+
+    .startDate,
+    .endDate {
+        padding: 1px 2px;
+    }
+
+    .cardName {
+        font-size: 0.55rem;
+        max-width: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendarRow {
+        height: 18px;
+    }
+
+    .cardName {
+        font-size: 0.5rem;
+        max-width: 70px;
+    }
+}

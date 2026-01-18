@@ -1,0 +1,255 @@
+.cardDetail {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #2d2d2d;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.detailForm {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.formSection {
+    margin-bottom: 1.5rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.sectionTitle {
+    margin: 0 0 0.75rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #e0e0e0;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid #404040;
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+
+    .sectionTitle {
+        margin: 0;
+        border: none;
+        padding: 0;
+    }
+}
+
+.formGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+}
+
+.formField {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.fieldLabel {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #b0b0b0;
+    margin: 0;
+}
+
+.fieldInput,
+.fieldSelect {
+    padding: 0.5rem;
+    border: 2px solid #555;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    background: #3a3a3a;
+    color: #e0e0e0;
+
+    &:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    &::placeholder {
+        color: #888;
+    }
+}
+
+.fieldSelect {
+    cursor: pointer;
+}
+
+.addButton {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: #218838;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    }
+}
+
+.addIcon {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.autoPaymentsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.paymentItem {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: #3a3a3a;
+    border-radius: 6px;
+    border: 1px solid #555;
+}
+
+.paymentFields {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.removeButton {
+    width: 32px;
+    height: 32px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        background: #c82333;
+        transform: scale(1.05);
+    }
+}
+
+.removeIcon {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.emptyState {
+    text-align: center;
+    padding: 1.5rem;
+    color: #888;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.actionButtons {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: #3a3a3a;
+    border-top: 1px solid #555;
+}
+
+.saveButton,
+.deleteButton {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none !important;
+    }
+}
+
+.saveButton {
+    background: #007bff;
+    color: white;
+
+    &:hover:not(:disabled) {
+        background: #0056b3;
+        transform: translateY(-1px);
+    }
+}
+
+.deleteButton {
+    background: #dc3545;
+    color: white;
+
+    &:hover:not(:disabled) {
+        background: #c82333;
+        transform: translateY(-1px);
+    }
+}
+
+.saveIcon,
+.deleteIcon {
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .detailForm {
+        padding: 1rem;
+    }
+
+    .formGrid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .paymentItem {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .paymentFields {
+        grid-template-columns: 1fr;
+    }
+
+    .removeButton {
+        align-self: flex-end;
+        width: auto;
+        padding: 0.5rem 1rem;
+    }
+
+    .actionButtons {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}

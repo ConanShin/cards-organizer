@@ -1,0 +1,126 @@
+/* [project]/src/app/home.module.scss.module.css [app-client] (css) */
+.home-module-scss-module__YAGOlW__page {
+  color: #e0e0e0;
+  background-color: #1a1a1a;
+  min-height: 100vh;
+  font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.home-module-scss-module__YAGOlW__appHeader {
+  color: #e0e0e0;
+  text-align: center;
+  background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+  padding: 1rem 0;
+  box-shadow: 0 2px 10px #0000004d;
+}
+
+.home-module-scss-module__YAGOlW__appTitle {
+  margin: 0 0 .25rem;
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+.home-module-scss-module__YAGOlW__appSubtitle {
+  opacity: .9;
+  margin: 0;
+  font-size: .55rem;
+}
+
+.home-module-scss-module__YAGOlW__appMain {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.home-module-scss-module__YAGOlW__mobileTabs {
+  background: #2d2d2d;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 2px 8px #0000004d;
+}
+
+.home-module-scss-module__YAGOlW__tabButton {
+  cursor: pointer;
+  color: #b0b0b0;
+  background: #3a3a3a;
+  border: none;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  gap: .5rem;
+  padding: 1rem;
+  font-size: .9rem;
+  font-weight: 500;
+  transition: all .3s;
+  display: flex;
+}
+
+.home-module-scss-module__YAGOlW__tabButton:hover {
+  background: #4a4a4a;
+}
+
+.home-module-scss-module__YAGOlW__tabButton.home-module-scss-module__YAGOlW__active {
+  color: #fff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transform: translateY(-1px);
+}
+
+.home-module-scss-module__YAGOlW__tabIcon {
+  font-size: 1.2rem;
+}
+
+.home-module-scss-module__YAGOlW__mainSections {
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  min-height: calc(100vh - 200px);
+  display: grid;
+}
+
+.home-module-scss-module__YAGOlW__mobileLayout {
+  grid-template-columns: 1fr;
+  gap: 0;
+  min-height: calc(100vh - 200px);
+}
+
+.home-module-scss-module__YAGOlW__holdingsSection, .home-module-scss-module__YAGOlW__informationSection {
+  background: #fff;
+  border-radius: 12px;
+  padding: 0;
+}
+
+.home-module-scss-module__YAGOlW__mobileFull {
+  height: 100%;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+@media (max-width: 1024px) {
+  .home-module-scss-module__YAGOlW__mainSections {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-module-scss-module__YAGOlW__appMain {
+    padding: 1rem;
+  }
+
+  .home-module-scss-module__YAGOlW__appHeader {
+    padding: .75rem 0;
+  }
+
+  .home-module-scss-module__YAGOlW__appHeader .home-module-scss-module__YAGOlW__appTitle {
+    margin-bottom: .2rem;
+    font-size: 1.1rem;
+  }
+
+  .home-module-scss-module__YAGOlW__appHeader .home-module-scss-module__YAGOlW__appSubtitle {
+    font-size: .5rem;
+  }
+}
+
+/*# sourceMappingURL=src_app_home_module_scss_module_css_bad6b30c._.single.css.map*/
