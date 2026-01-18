@@ -444,8 +444,7 @@ const Holdings = ()=>{
         }
         const companyName = searchCompany.trim();
         const companyCards = cards.filter((card)=>{
-            const cardCompany = getCardCompany(card.name);
-            return cardCompany.toLowerCase().includes(companyName.toLowerCase());
+            return card.name.toLowerCase().includes(companyName.toLowerCase());
         });
         if (companyCards.length === 0) {
             alert(`${companyName} 카드사의 카드를 찾을 수 없습니다.`);
@@ -504,7 +503,7 @@ const Holdings = ()=>{
                         children: "카드 보유 현황"
                     }, void 0, false, {
                         fileName: "[project]/src/components/Holdings.tsx",
-                        lineNumber: 191,
+                        lineNumber: 190,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -523,7 +522,7 @@ const Holdings = ()=>{
                                             onKeyDown: (e)=>e.key === 'Enter' && handleSearch()
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Holdings.tsx",
-                                            lineNumber: 195,
+                                            lineNumber: 194,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -533,18 +532,18 @@ const Holdings = ()=>{
                                                 size: 16
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Holdings.tsx",
-                                                lineNumber: 203,
+                                                lineNumber: 202,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Holdings.tsx",
-                                            lineNumber: 202,
+                                            lineNumber: 201,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/Holdings.tsx",
-                                    lineNumber: 194,
+                                    lineNumber: 193,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 searchResults.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -561,7 +560,7 @@ const Holdings = ()=>{
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/Holdings.tsx",
-                                                    lineNumber: 209,
+                                                    lineNumber: 208,
                                                     columnNumber: 37
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -571,18 +570,18 @@ const Holdings = ()=>{
                                                         size: 16
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/Holdings.tsx",
-                                                        lineNumber: 211,
+                                                        lineNumber: 210,
                                                         columnNumber: 41
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Holdings.tsx",
-                                                    lineNumber: 210,
+                                                    lineNumber: 209,
                                                     columnNumber: 37
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Holdings.tsx",
-                                            lineNumber: 208,
+                                            lineNumber: 207,
                                             columnNumber: 33
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -597,12 +596,12 @@ const Holdings = ()=>{
                                                                 children: userResult.user
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/Holdings.tsx",
-                                                                lineNumber: 218,
+                                                                lineNumber: 217,
                                                                 columnNumber: 49
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/Holdings.tsx",
-                                                            lineNumber: 217,
+                                                            lineNumber: 216,
                                                             columnNumber: 45
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         userResult.results.map((result)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -615,12 +614,12 @@ const Holdings = ()=>{
                                                                             children: result.cardName
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Holdings.tsx",
-                                                                            lineNumber: 223,
+                                                                            lineNumber: 222,
                                                                             columnNumber: 57
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/Holdings.tsx",
-                                                                        lineNumber: 222,
+                                                                        lineNumber: 221,
                                                                         columnNumber: 53
                                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -640,13 +639,13 @@ const Holdings = ()=>{
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/src/components/Holdings.tsx",
-                                                                                    lineNumber: 229,
+                                                                                    lineNumber: 228,
                                                                                     columnNumber: 65
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/Holdings.tsx",
-                                                                            lineNumber: 227,
+                                                                            lineNumber: 226,
                                                                             columnNumber: 61
                                                                         }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                                             className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Holdings$2e$module$2e$scss__$5b$app$2d$ssr$5d$__$28$css__module$29$__["default"].usingInfo,
@@ -660,52 +659,52 @@ const Holdings = ()=>{
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/src/components/Holdings.tsx",
-                                                                                    lineNumber: 234,
+                                                                                    lineNumber: 233,
                                                                                     columnNumber: 65
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/Holdings.tsx",
-                                                                            lineNumber: 232,
+                                                                            lineNumber: 231,
                                                                             columnNumber: 61
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/Holdings.tsx",
-                                                                        lineNumber: 225,
+                                                                        lineNumber: 224,
                                                                         columnNumber: 53
                                                                     }, ("TURBOPACK compile-time value", void 0))
                                                                 ]
                                                             }, result.cardName, true, {
                                                                 fileName: "[project]/src/components/Holdings.tsx",
-                                                                lineNumber: 221,
+                                                                lineNumber: 220,
                                                                 columnNumber: 49
                                                             }, ("TURBOPACK compile-time value", void 0)))
                                                     ]
                                                 }, userResult.user, true, {
                                                     fileName: "[project]/src/components/Holdings.tsx",
-                                                    lineNumber: 216,
+                                                    lineNumber: 215,
                                                     columnNumber: 41
                                                 }, ("TURBOPACK compile-time value", void 0)))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Holdings.tsx",
-                                            lineNumber: 214,
+                                            lineNumber: 213,
                                             columnNumber: 33
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/Holdings.tsx",
-                                    lineNumber: 207,
+                                    lineNumber: 206,
                                     columnNumber: 29
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/Holdings.tsx",
-                            lineNumber: 193,
+                            lineNumber: 192,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/Holdings.tsx",
-                        lineNumber: 192,
+                        lineNumber: 191,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -726,7 +725,7 @@ const Holdings = ()=>{
                                             className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Holdings$2e$module$2e$scss__$5b$app$2d$ssr$5d$__$28$css__module$29$__["default"].checkboxInput
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Holdings.tsx",
-                                            lineNumber: 250,
+                                            lineNumber: 249,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -734,18 +733,18 @@ const Holdings = ()=>{
                                             children: "해지된 카드 표시"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Holdings.tsx",
-                                            lineNumber: 256,
+                                            lineNumber: 255,
                                             columnNumber: 29
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/Holdings.tsx",
-                                    lineNumber: 249,
+                                    lineNumber: 248,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Holdings.tsx",
-                                lineNumber: 248,
+                                lineNumber: 247,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             !isMobile && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -757,7 +756,7 @@ const Holdings = ()=>{
                                         className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Holdings$2e$module$2e$scss__$5b$app$2d$ssr$5d$__$28$css__module$29$__["default"].addIcon
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Holdings.tsx",
-                                        lineNumber: 261,
+                                        lineNumber: 260,
                                         columnNumber: 29
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -765,25 +764,25 @@ const Holdings = ()=>{
                                         children: "새 카드 추가"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Holdings.tsx",
-                                        lineNumber: 262,
+                                        lineNumber: 261,
                                         columnNumber: 29
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Holdings.tsx",
-                                lineNumber: 260,
+                                lineNumber: 259,
                                 columnNumber: 25
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Holdings.tsx",
-                        lineNumber: 247,
+                        lineNumber: 246,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Holdings.tsx",
-                lineNumber: 190,
+                lineNumber: 189,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -797,7 +796,7 @@ const Holdings = ()=>{
                                 children: "Conan"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Holdings.tsx",
-                                lineNumber: 270,
+                                lineNumber: 269,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -811,7 +810,7 @@ const Holdings = ()=>{
                                                 children: card.name || '새 카드'
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Holdings.tsx",
-                                                lineNumber: 278,
+                                                lineNumber: 277,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -819,24 +818,24 @@ const Holdings = ()=>{
                                                 children: getStatusText(card.status)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Holdings.tsx",
-                                                lineNumber: 279,
+                                                lineNumber: 278,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, `conan-${index}`, true, {
                                         fileName: "[project]/src/components/Holdings.tsx",
-                                        lineNumber: 273,
+                                        lineNumber: 272,
                                         columnNumber: 29
                                     }, ("TURBOPACK compile-time value", void 0)))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Holdings.tsx",
-                                lineNumber: 271,
+                                lineNumber: 270,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Holdings.tsx",
-                        lineNumber: 269,
+                        lineNumber: 268,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -847,7 +846,7 @@ const Holdings = ()=>{
                                 children: "Chaeji"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Holdings.tsx",
-                                lineNumber: 286,
+                                lineNumber: 285,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -861,7 +860,7 @@ const Holdings = ()=>{
                                                 children: card.name || '새 카드'
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Holdings.tsx",
-                                                lineNumber: 294,
+                                                lineNumber: 293,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -869,36 +868,36 @@ const Holdings = ()=>{
                                                 children: getStatusText(card.status)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Holdings.tsx",
-                                                lineNumber: 295,
+                                                lineNumber: 294,
                                                 columnNumber: 33
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, `chaeji-${index}`, true, {
                                         fileName: "[project]/src/components/Holdings.tsx",
-                                        lineNumber: 289,
+                                        lineNumber: 288,
                                         columnNumber: 29
                                     }, ("TURBOPACK compile-time value", void 0)))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Holdings.tsx",
-                                lineNumber: 287,
+                                lineNumber: 286,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Holdings.tsx",
-                        lineNumber: 285,
+                        lineNumber: 284,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Holdings.tsx",
-                lineNumber: 268,
+                lineNumber: 267,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/Holdings.tsx",
-        lineNumber: 189,
+        lineNumber: 188,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };

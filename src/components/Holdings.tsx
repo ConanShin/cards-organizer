@@ -129,8 +129,7 @@ const Holdings: React.FC = () => {
 
         const companyName = searchCompany.trim();
         const companyCards = cards.filter((card: Card) => {
-            const cardCompany = getCardCompany(card.name);
-            return cardCompany.toLowerCase().includes(companyName.toLowerCase());
+            return card.name.toLowerCase().includes(companyName.toLowerCase());
         });
 
         if (companyCards.length === 0) {

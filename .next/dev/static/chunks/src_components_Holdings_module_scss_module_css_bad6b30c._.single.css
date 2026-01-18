@@ -46,9 +46,11 @@
 }
 
 .Holdings-module-scss-module__0su9yW__searchControls {
+  z-index: 100;
   flex-direction: column;
   gap: 1rem;
   display: flex;
+  position: relative;
 }
 
 .Holdings-module-scss-module__0su9yW__searchInputContainer {
