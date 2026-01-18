@@ -82,31 +82,40 @@ const CardDetail: React.FC = () => {
         });
     };
 
+    const showDialog = useCardsStore(state => state.showDialog);
+
     const saveCard = async () => {
         if (!formData || !isFormValid) return;
 
         const cardName = formData.name || '새 카드';
-        if (window.confirm(`${cardName}을(를) 저장하시겠습니까?`)) {
-            const savingData = {
-                ...formData,
-                period: {
-                    start: new Date(formData.period.start),
-                    end: new Date(formData.period.end)
-                }
-            };
-            await saveCardAction(savingData);
-            // alert only if needed, better to just close or show toast
-            // alert(`${cardName}이(가) 성공적으로 저장되었습니다.`);
-        }
+        showDialog({
+            title: '카드 저장',
+            message: `${cardName}을(를) 저장하시겠습니까?`,
+            type: 'confirm',
+            onConfirm: async () => {
+                const savingData = {
+                    ...formData,
+                    period: {
+                        start: new Date(formData.period.start),
+                        end: new Date(formData.period.end)
+                    }
+                };
+                await saveCardAction(savingData);
+            }
+        });
     };
 
     const deleteCard = async () => {
+        if (!formData.id) return;
         const cardName = formData.name || '카드';
-        if (window.confirm(`${cardName}을(를) 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.`)) {
-            if (formData.id) {
-                await removeCardAction(formData.id);
+        showDialog({
+            title: '카드 삭제',
+            message: `${cardName}을(를) 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.`,
+            type: 'confirm',
+            onConfirm: async () => {
+                await removeCardAction(formData.id!);
             }
-        }
+        });
     };
 
     return (

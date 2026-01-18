@@ -6,6 +6,7 @@ import useCardsStore, { CardsState } from '@/store';
 import Holdings from '@/components/Holdings';
 import Information from '@/components/Information';
 import CardDetail from '@/components/CardDetail';
+import CustomDialog from '@/components/CustomDialog';
 import { CreditCard, Calendar, X, Plus } from 'lucide-react';
 import { CARD_STATUS } from '@/data/constant';
 import { Card } from '@/types/card';
@@ -185,6 +186,8 @@ export default function Home() {
                     </div>
                 </div>
             )}
+            {/* Global Custom Dialog */}
+            <CustomDialog />
         </div>
     );
 }

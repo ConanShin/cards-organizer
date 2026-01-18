@@ -2,15 +2,26 @@ import { create } from 'zustand';
 import { Card } from '@/types/card';
 import { fetchCards, createCard, updateCard, deleteCard } from '@/services/api';
 
+export interface DialogConfig {
+    isOpen: boolean;
+    title: string;
+    message: string;
+    type: 'confirm' | 'alert';
+    onConfirm?: () => void;
+}
+
 export interface CardsState {
     cards: Card[];
     selectedCard: Card | null;
     isLoading: boolean;
     error: string | null;
+    dialog: DialogConfig;
 
     setCards: (cards: Card[]) => void;
     selectCard: (card: Card) => void;
     resetSelection: () => void;
+    showDialog: (config: Omit<DialogConfig, 'isOpen'>) => void;
+    hideDialog: () => void;
 
     loadCards: () => Promise<void>;
     saveCard: (card: Card) => Promise<void>;
@@ -19,14 +30,26 @@ export interface CardsState {
 }
 
 const useCardsStore = create<CardsState>((set, get) => ({
-    cards: [], // Start empty, load from API
+    cards: [],
     selectedCard: null,
     isLoading: false,
     error: null,
+    dialog: {
+        isOpen: false,
+        title: '',
+        message: '',
+        type: 'alert'
+    },
 
     setCards: (cards) => set({ cards }),
     selectCard: (card) => set({ selectedCard: card }),
     resetSelection: () => set({ selectedCard: null }),
+    showDialog: (config) => set({
+        dialog: { ...config, isOpen: true }
+    }),
+    hideDialog: () => set((state) => ({
+        dialog: { ...state.dialog, isOpen: false }
+    })),
     addLocalCard: (card) => set((state) => ({
         cards: [...state.cards, card],
         selectedCard: card
@@ -51,15 +74,24 @@ const useCardsStore = create<CardsState>((set, get) => ({
             } else if (card.id) {
                 await updateCard(card);
             } else {
-                // Fallback for missing ID on existing card if correct logic wasn't followed
                 await createCard(card);
             }
-            // Reload to get fresh data (including new IDs)
             await get().loadCards();
-            set({ selectedCard: null }); // Close modal/selection on success
+            set({ selectedCard: null });
+
+            get().showDialog({
+                title: '저장 완료',
+                message: `${card.name || '카드'}가 성공적으로 저장되었습니다.`,
+                type: 'alert'
+            });
         } catch (error) {
             console.error('Failed to save card:', error);
             set({ isLoading: false, error: 'Failed to save card' });
+            get().showDialog({
+                title: '저장 실패',
+                message: '카드 정보를 저장하는 중 오류가 발생했습니다.',
+                type: 'alert'
+            });
         }
     },
 
@@ -76,9 +108,20 @@ const useCardsStore = create<CardsState>((set, get) => ({
             await deleteCard(cardId);
             await get().loadCards();
             set({ selectedCard: null });
+
+            get().showDialog({
+                title: '삭제 완료',
+                message: '카드가 성공적으로 삭제되었습니다.',
+                type: 'alert'
+            });
         } catch (error) {
             console.error('Failed to delete card:', error);
             set({ isLoading: false, error: 'Failed to delete card' });
+            get().showDialog({
+                title: '삭제 실패',
+                message: '카드를 삭제하는 중 오류가 발생했습니다.',
+                type: 'alert'
+            });
         }
     }
 }));
