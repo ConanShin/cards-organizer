@@ -87,20 +87,24 @@
     display: grid;
     grid-template-columns: 380px 1fr;
     gap: 2rem;
-    align-items: start;
+    /* Fill viewport height on desktop for app-like feel */
+    height: calc(100vh - 140px);
+    align-items: stretch;
 }
 
 .mobileLayout {
     grid-template-columns: 1fr;
     gap: 0;
+    height: auto;
+    /* Let content grow on mobile */
 }
 
-/* Sections wrappers will be handled by components, 
-   but we can enforce some layout constraints here */
+/* Sections wrappers */
 .holdingsSection,
 .informationSection {
     min-width: 0;
-    /* Prevent grid blowout */
+    height: 100%;
+    /* Pass down height */
 }
 
 .mobileFull {
@@ -112,6 +116,8 @@
     .mainSections {
         grid-template-columns: 1fr;
         gap: 2rem;
+        height: auto;
+        /* Reset height for scrolling layout */
     }
 }
 

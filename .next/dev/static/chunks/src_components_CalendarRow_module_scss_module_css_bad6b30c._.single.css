@@ -1,80 +1,88 @@
 /* [project]/src/components/CalendarRow.module.scss.module.css [app-client] (css) */
 .CalendarRow-module-scss-module__Z7_GUq__calendarRow {
+  border-radius: var(--radius-sm);
   cursor: pointer;
   z-index: 1;
-  border-radius: 3px;
   height: 24px;
   margin: 1px 0;
-  transition: all .3s;
+  transition: all .2s cubic-bezier(.25, .8, .25, 1);
   position: absolute;
-  overflow: hidden;
 }
 
 .CalendarRow-module-scss-module__Z7_GUq__calendarRow:hover {
-  z-index: 10;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px #00000026;
+  transform: translateY(-2px)scaleY(1.1);
+  z-index: 100 !important;
 }
 
 .CalendarRow-module-scss-module__Z7_GUq__timelineBar {
-  border: 2px solid #0000;
-  border-radius: 8px;
+  border: 1px solid #fff3;
+  border-radius: 12px;
   align-items: center;
   width: 100%;
   height: 100%;
   padding: 0 8px;
-  transition: all .3s;
+  transition: all .2s;
   display: flex;
   position: relative;
+  box-shadow: 0 2px 4px #0003;
+}
+
+.CalendarRow-module-scss-module__Z7_GUq__calendarRow:hover .CalendarRow-module-scss-module__Z7_GUq__timelineBar {
+  box-shadow: 0 4px 12px #0006;
 }
 
 .CalendarRow-module-scss-module__Z7_GUq__dateIndicators {
-  color: #fff;
-  text-shadow: 0 1px 2px #0000004d;
+  opacity: 0;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 100%;
-  font-size: .65rem;
-  font-weight: 600;
+  transition: opacity .2s;
   display: flex;
-  position: relative;
+}
+
+.CalendarRow-module-scss-module__Z7_GUq__calendarRow:hover .CalendarRow-module-scss-module__Z7_GUq__dateIndicators {
+  opacity: 1;
+}
+
+.CalendarRow-module-scss-module__Z7_GUq__startDate, .CalendarRow-module-scss-module__Z7_GUq__endDate {
+  color: #fff;
+  white-space: nowrap;
+  pointer-events: none;
+  background: #000c;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: .7rem;
+  position: absolute;
+  top: -25px;
+  box-shadow: 0 2px 4px #0000004d;
+}
+
+.CalendarRow-module-scss-module__Z7_GUq__startDate:after, .CalendarRow-module-scss-module__Z7_GUq__endDate:after {
+  content: "";
+  border: 4px solid #0000;
+  border-top-color: #000c;
+  border-bottom-width: 0;
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .CalendarRow-module-scss-module__Z7_GUq__startDate {
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
-  z-index: 2;
-  text-align: center;
-  background: #0009;
-  border-radius: 4px;
-  min-width: 20px;
-  padding: 2px 6px;
-  position: absolute;
-  top: 40%;
-  left: -8px;
-  transform: translateY(-50%);
+  left: 0;
 }
 
 .CalendarRow-module-scss-module__Z7_GUq__endDate {
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
-  z-index: 2;
-  text-align: center;
-  background: #0009;
-  border-radius: 4px;
-  min-width: 20px;
-  padding: 2px 6px;
-  position: absolute;
-  top: 40%;
-  right: 12px;
-  transform: translateY(-50%);
+  right: 0;
 }
 
 .CalendarRow-module-scss-module__Z7_GUq__cardInfo {
   text-align: center;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
+  width: 100%;
+  padding: 0 4px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -83,48 +91,35 @@
 
 .CalendarRow-module-scss-module__Z7_GUq__cardName {
   color: #fff;
-  text-shadow: 0 1px 2px #00000080;
+  text-shadow: 0 1px 3px #000c;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 100px;
-  font-size: .65rem;
+  font-size: .7rem;
   font-weight: 600;
-  line-height: 1;
+  display: block;
   overflow: hidden;
 }
 
 .CalendarRow-module-scss-module__Z7_GUq__holderConan .CalendarRow-module-scss-module__Z7_GUq__timelineBar {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-color: #5a6fd8;
-}
-
-.CalendarRow-module-scss-module__Z7_GUq__holderConan .CalendarRow-module-scss-module__Z7_GUq__timelineBar:hover {
-  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
-  border-color: #4c63d2;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-color: #a0b4ff4d;
 }
 
 .CalendarRow-module-scss-module__Z7_GUq__holderChaeji .CalendarRow-module-scss-module__Z7_GUq__timelineBar {
-  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-  border-color: #d63031;
-}
-
-.CalendarRow-module-scss-module__Z7_GUq__holderChaeji .CalendarRow-module-scss-module__Z7_GUq__timelineBar:hover {
-  background: linear-gradient(135deg, #d63031 0%, #a93226 100%);
-  border-color: #c23616;
-}
-
-.CalendarRow-module-scss-module__Z7_GUq__statusUsing .CalendarRow-module-scss-module__Z7_GUq__timelineBar {
-  box-shadow: 0 2px 8px #0000001a;
+  background: linear-gradient(90deg, #ff758c 0%, #ff7eb3 100%);
+  border-color: #ffc8c84d;
 }
 
 .CalendarRow-module-scss-module__Z7_GUq__statusKeeping .CalendarRow-module-scss-module__Z7_GUq__timelineBar {
-  opacity: .8;
-  border-style: dashed;
+  opacity: .7;
+  background: repeating-linear-gradient(45deg, #ffc10733, #ffc10733 10px, #ffc10766 10px 20px);
+  border: 1px dashed #ffc10780;
 }
 
 .CalendarRow-module-scss-module__Z7_GUq__statusTerminated .CalendarRow-module-scss-module__Z7_GUq__timelineBar {
-  opacity: .6;
-  filter: grayscale(.3);
+  opacity: .5;
+  filter: grayscale(.6);
+  background: #444;
 }
 
 @media (max-width: 768px) {
@@ -132,32 +127,8 @@
     height: 20px;
   }
 
-  .CalendarRow-module-scss-module__Z7_GUq__timelineBar {
-    padding: 0 2px;
-  }
-
-  .CalendarRow-module-scss-module__Z7_GUq__dateIndicators {
-    font-size: .55rem;
-  }
-
-  .CalendarRow-module-scss-module__Z7_GUq__startDate, .CalendarRow-module-scss-module__Z7_GUq__endDate {
-    padding: 1px 2px;
-  }
-
   .CalendarRow-module-scss-module__Z7_GUq__cardName {
-    max-width: 80px;
-    font-size: .55rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .CalendarRow-module-scss-module__Z7_GUq__calendarRow {
-    height: 18px;
-  }
-
-  .CalendarRow-module-scss-module__Z7_GUq__cardName {
-    max-width: 70px;
-    font-size: .5rem;
+    font-size: .6rem;
   }
 }
 

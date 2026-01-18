@@ -1,45 +1,56 @@
 /* [project]/src/components/Information.module.scss.module.css [app-client] (css) */
 .Information-module-scss-module__UyFpcG__information {
-  background: #2d2d2d;
-  border-radius: 12px;
-  flex-direction: column;
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
   height: 100%;
+  box-shadow: var(--shadow-md);
+  border: 1px solid #ffffff0d;
+  flex-direction: column;
   padding: 1.5rem;
   display: flex;
+  position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 8px #0000004d;
+}
+
+.Information-module-scss-module__UyFpcG__information:before {
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(#ffffff08, #0000);
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .Information-module-scss-module__UyFpcG__informationContent {
+  z-index: 1;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
   height: 100%;
   display: flex;
 }
 
 .Information-module-scss-module__UyFpcG__sectionHeader {
-  border-bottom: 2px solid #404040;
+  border-bottom: 1px solid #ffffff0d;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
   padding-bottom: 1rem;
   display: flex;
 }
 
 .Information-module-scss-module__UyFpcG__sectionHeader .Information-module-scss-module__UyFpcG__sectionTitle {
-  color: #e0e0e0;
+  color: var(--text-primary);
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
 }
 
 .Information-module-scss-module__UyFpcG__calendarSection {
-  background: #3a3a3a;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   flex-direction: column;
   flex: 1;
   min-height: 0;
-  padding: 1rem;
   display: flex;
 }
 
@@ -50,66 +61,67 @@
 }
 
 .Information-module-scss-module__UyFpcG__yearNavigation .Information-module-scss-module__UyFpcG__navButton {
-  color: #e0e0e0;
+  background: var(--bg-surface-elevated);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  background: #4a4a4a;
-  border: 2px solid #666;
-  border-radius: 8px;
+  border: 1px solid #ffffff1a;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  transition: all .3s;
+  width: 36px;
+  height: 36px;
+  font-size: 1.1rem;
+  transition: all .2s;
   display: flex;
 }
 
 .Information-module-scss-module__UyFpcG__yearNavigation .Information-module-scss-module__UyFpcG__navButton:hover:not(:disabled) {
-  background: #5a5a5a;
-  border-color: #777;
-  transform: scale(1.05);
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: var(--shadow-glow);
 }
 
 .Information-module-scss-module__UyFpcG__yearNavigation .Information-module-scss-module__UyFpcG__navButton:disabled {
+  opacity: .3;
   cursor: not-allowed;
-  opacity: .6;
-  background: #3a3a3a;
-  border-color: #555;
 }
 
 .Information-module-scss-module__UyFpcG__yearNavigation .Information-module-scss-module__UyFpcG__currentYear {
-  color: #e0e0e0;
+  color: var(--text-primary);
   text-align: center;
+  font-variant-numeric: tabular-nums;
   min-width: 80px;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .Information-module-scss-module__UyFpcG__calendarContainer {
-  background: #3a3a3a;
-  border: 1px solid #555;
-  border-radius: 12px;
+  background: var(--bg-surface-elevated);
+  border-radius: var(--radius-lg);
+  border: 1px solid #ffffff0d;
   flex-direction: column;
   flex: 1;
+  margin-top: 1rem;
   display: flex;
   overflow: hidden;
+  box-shadow: inset 0 2px 10px #0003;
 }
 
 .Information-module-scss-module__UyFpcG__monthHeaders {
-  background: #4a4a4a;
-  border-bottom: 2px solid #666;
+  background: #1e1e1e80;
+  border-bottom: 1px solid #ffffff0d;
   grid-template-columns: repeat(12, 1fr);
   display: grid;
 }
 
 .Information-module-scss-module__UyFpcG__monthHeaders .Information-module-scss-module__UyFpcG__monthHeader {
   text-align: center;
-  color: #e0e0e0;
-  border-right: 1px solid #666;
-  padding: 1rem .5rem;
-  font-size: .9rem;
-  font-weight: 600;
+  color: var(--text-tertiary);
+  border-right: 1px solid #ffffff05;
+  padding: .75rem .25rem;
+  font-size: .8rem;
+  font-weight: 500;
 }
 
 .Information-module-scss-module__UyFpcG__monthHeaders .Information-module-scss-module__UyFpcG__monthHeader:last-child {
@@ -122,23 +134,39 @@
   overflow: auto;
 }
 
+.Information-module-scss-module__UyFpcG__timelineContainer::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.Information-module-scss-module__UyFpcG__timelineContainer::-webkit-scrollbar-thumb {
+  background: #ffffff1a;
+  border-radius: 4px;
+}
+
+.Information-module-scss-module__UyFpcG__timelineContainer::-webkit-scrollbar-track {
+  background: #0000001a;
+}
+
 .Information-module-scss-module__UyFpcG__cardsTimeline {
   z-index: 1;
+  min-width: 800px;
   min-height: 100%;
-  padding: 1rem 0 2rem;
+  padding: 1rem 0 3rem;
   position: relative;
 }
 
 .Information-module-scss-module__UyFpcG__timelineGrid {
   pointer-events: none;
   grid-template-columns: repeat(12, 1fr);
+  min-width: 800px;
   display: grid;
   position: absolute;
   inset: 0;
 }
 
 .Information-module-scss-module__UyFpcG__timelineGrid .Information-module-scss-module__UyFpcG__monthColumn {
-  border-right: 1px solid #e9ecef80;
+  border-right: 1px dashed #ffffff08;
   position: relative;
 }
 
@@ -147,8 +175,8 @@
 }
 
 .Information-module-scss-module__UyFpcG__timelineGrid .Information-module-scss-module__UyFpcG__monthColumn .Information-module-scss-module__UyFpcG__monthDivider {
-  background: linear-gradient(#0000 0%, #a79d9d4d 10% 90%, #0000 100%);
-  width: 2px;
+  background: linear-gradient(#0000, #ffffff0d, #0000);
+  width: 1px;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -161,39 +189,51 @@
   height: 30px;
   margin: 0;
   padding: 0 1rem;
-  font-size: .9rem;
-  font-weight: 600;
   display: flex;
   position: absolute;
   left: 0;
   right: 0;
 }
 
+.Information-module-scss-module__UyFpcG__userDivider:after {
+  content: "";
+  z-index: -1;
+  background: #ffffff0d;
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+}
+
 .Information-module-scss-module__UyFpcG__userDivider .Information-module-scss-module__UyFpcG__dividerLabel {
-  background: #fff;
-  border: 2px solid;
-  border-radius: 12px;
-  padding: .25rem .75rem;
-  box-shadow: 0 2px 4px #0000001a;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid;
+  border-radius: 20px;
+  padding: .25rem 1rem;
+  font-size: .75rem;
+  font-weight: 600;
 }
 
 .Information-module-scss-module__UyFpcG__userDivider.Information-module-scss-module__UyFpcG__dividerConan .Information-module-scss-module__UyFpcG__dividerLabel {
-  color: #667eea;
-  background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
-  border-color: #667eea;
+  color: #8da4f7;
+  background: #667eea1a;
+  border-color: #667eea4d;
 }
 
 .Information-module-scss-module__UyFpcG__userDivider.Information-module-scss-module__UyFpcG__dividerChaeji .Information-module-scss-module__UyFpcG__dividerLabel {
-  color: #e74c3c;
-  background: linear-gradient(135deg, #ffebee, #fce4ec);
-  border-color: #e74c3c;
+  color: #ff8a80;
+  background: #e74c3c1a;
+  border-color: #e74c3c4d;
 }
 
 .Information-module-scss-module__UyFpcG__modalOverlay {
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   z-index: 1000;
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
-  background: #000000b3;
+  background: #0009;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -205,22 +245,23 @@
 }
 
 .Information-module-scss-module__UyFpcG__modalContent {
-  background: #2d2d2d;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
+  background: #1e1e1e;
+  border: 1px solid #ffffff1a;
   flex-direction: column;
-  width: 800px;
+  width: 600px;
   max-width: 90vw;
   max-height: 90vh;
-  animation: .3s ease-out Information-module-scss-module__UyFpcG__modalSlideIn;
+  animation: .3s cubic-bezier(.16, 1, .3, 1) Information-module-scss-module__UyFpcG__modalSlideIn;
   display: flex;
   overflow: hidden;
-  box-shadow: 0 20px 60px #00000080;
+  box-shadow: 0 25px 50px -12px #00000080;
 }
 
 @keyframes Information-module-scss-module__UyFpcG__modalSlideIn {
   from {
     opacity: 0;
-    transform: scale(.9)translateY(-20px);
+    transform: scale(.95)translateY(10px);
   }
 
   to {
@@ -230,12 +271,11 @@
 }
 
 .Information-module-scss-module__UyFpcG__modalHeader {
-  color: #fff;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-bottom: 1px solid #e9ecef;
+  background: var(--bg-surface-elevated);
+  border-bottom: 1px solid #ffffff0d;
   justify-content: space-between;
-  align-items: center;
-  padding: 1rem 1.5rem;
+  align-items: flex-start;
+  padding: 1.25rem 1.5rem;
   display: flex;
 }
 
@@ -246,126 +286,92 @@
 }
 
 .Information-module-scss-module__UyFpcG__modalHeader .Information-module-scss-module__UyFpcG__modalTitle {
+  color: var(--text-primary);
   margin: 0;
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: 600;
 }
 
 .Information-module-scss-module__UyFpcG__modalHeader .Information-module-scss-module__UyFpcG__modalStatusBadge {
   text-transform: uppercase;
-  letter-spacing: .3px;
-  border-radius: 12px;
+  letter-spacing: .5px;
+  border-radius: 20px;
   align-self: flex-start;
-  padding: .2rem .6rem;
+  padding: .25rem .75rem;
   font-size: .7rem;
   font-weight: 600;
 }
 
 .Information-module-scss-module__UyFpcG__modalHeader .Information-module-scss-module__UyFpcG__statusUsing {
-  background: #28a745e6;
+  color: #4cd175;
+  background: #28a74526;
 }
 
 .Information-module-scss-module__UyFpcG__modalHeader .Information-module-scss-module__UyFpcG__statusKeeping {
-  color: #212529;
-  background: #ffc107e6;
+  color: #ffd54f;
+  background: #ffc10726;
 }
 
 .Information-module-scss-module__UyFpcG__modalHeader .Information-module-scss-module__UyFpcG__statusTerminated {
-  background: #dc3545e6;
+  color: #ff6b6b;
+  background: #dc354526;
 }
 
 .Information-module-scss-module__UyFpcG__modalHeader .Information-module-scss-module__UyFpcG__modalCloseButton {
-  color: #fff;
+  color: var(--text-secondary);
   cursor: pointer;
   background: none;
   border: none;
-  border-radius: 4px;
+  border-radius: 50%;
   justify-content: center;
   align-items: center;
-  width: 32px;
-  height: 32px;
-  padding: .25rem;
-  font-size: 1.5rem;
-  transition: background-color .2s;
+  padding: .5rem;
+  transition: all .2s;
   display: flex;
 }
 
 .Information-module-scss-module__UyFpcG__modalHeader .Information-module-scss-module__UyFpcG__modalCloseButton:hover {
-  background: #0000004d;
+  color: var(--text-primary);
+  background: #ffffff1a;
 }
 
 .Information-module-scss-module__UyFpcG__modalBody {
-  background: #2d2d2d;
+  background: var(--bg-surface);
   flex: 1;
-  max-height: calc(90vh - 80px);
+  padding: 1.5rem;
   overflow-y: auto;
 }
 
 @media (max-width: 1024px) {
-  .Information-module-scss-module__UyFpcG__informationContent {
-    gap: 1.5rem;
-  }
-
-  .Information-module-scss-module__UyFpcG__sectionHeader {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
-  .Information-module-scss-module__UyFpcG__sectionHeader .Information-module-scss-module__UyFpcG__yearNavigation {
-    align-self: center;
-  }
-
-  .Information-module-scss-module__UyFpcG__monthHeaders .Information-module-scss-module__UyFpcG__monthHeader {
-    padding: .75rem .25rem;
-    font-size: .8rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .Information-module-scss-module__UyFpcG__yearNavigation .Information-module-scss-module__UyFpcG__navButton {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
-  }
-
-  .Information-module-scss-module__UyFpcG__yearNavigation .Information-module-scss-module__UyFpcG__currentYear {
-    min-width: 60px;
-    font-size: 1.2rem;
-  }
-
   .Information-module-scss-module__UyFpcG__monthHeaders .Information-module-scss-module__UyFpcG__monthHeader {
     padding: .5rem .1rem;
     font-size: .7rem;
   }
+}
+
+@media (max-width: 768px) {
+  .Information-module-scss-module__UyFpcG__information {
+    box-shadow: none;
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 1rem;
+  }
+
+  .Information-module-scss-module__UyFpcG__calendarContainer {
+    border-radius: var(--radius-md);
+  }
+
+  .Information-module-scss-module__UyFpcG__currentYear {
+    font-size: 1.2rem;
+  }
 
   .Information-module-scss-module__UyFpcG__modalContent {
-    width: 95vw;
-    max-height: 95vh;
-    margin: 1rem;
-  }
-
-  .Information-module-scss-module__UyFpcG__modalHeader {
-    padding: .75rem 1rem;
-  }
-
-  .Information-module-scss-module__UyFpcG__modalHeader .Information-module-scss-module__UyFpcG__modalTitle {
-    font-size: 1.1rem;
-  }
-
-  .Information-module-scss-module__UyFpcG__modalHeader .Information-module-scss-module__UyFpcG__modalStatusBadge {
-    padding: .15rem .5rem;
-    font-size: .65rem;
-  }
-
-  .Information-module-scss-module__UyFpcG__modalHeader .Information-module-scss-module__UyFpcG__modalCloseButton {
-    width: 28px;
-    height: 28px;
-    font-size: 1.3rem;
-  }
-
-  .Information-module-scss-module__UyFpcG__modalBody {
-    max-height: calc(95vh - 70px);
+    border-radius: 0;
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
   }
 }
 

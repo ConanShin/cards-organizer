@@ -1,434 +1,343 @@
 /* [project]/src/components/Holdings.module.scss.module.css [app-client] (css) */
 .Holdings-module-scss-module__0su9yW__holdings {
-  background: #2d2d2d;
-  border-radius: 12px;
-  flex-direction: column;
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
   height: 100%;
-  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid #ffffff0d;
+  flex-direction: column;
   display: flex;
+  position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 8px #0000004d;
+}
+
+.Holdings-module-scss-module__0su9yW__holdings:before {
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(#ffffff08, #0000);
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .Holdings-module-scss-module__0su9yW__holdingsHeader {
-  border-bottom: 2px solid #404040;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
+  z-index: 2;
+  background: none;
+  border-bottom: 1px solid #ffffff0d;
+  padding: 1.5rem 1.5rem 1rem;
 }
 
 .Holdings-module-scss-module__0su9yW__holdingsTitle {
-  color: #e0e0e0;
-  margin: 0 0 1rem;
-  font-size: 1.5rem;
+  color: var(--text-primary);
+  align-items: center;
+  gap: .5rem;
+  margin: 0 0 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
+  display: flex;
 }
 
 .Holdings-module-scss-module__0su9yW__headerControls {
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   display: flex;
 }
 
 .Holdings-module-scss-module__0su9yW__searchControls {
   flex-direction: column;
-  gap: .75rem;
+  gap: 1rem;
   display: flex;
 }
 
 .Holdings-module-scss-module__0su9yW__searchInputContainer {
-  box-sizing: border-box;
+  background: var(--bg-surface-elevated);
+  border-radius: var(--radius-md);
+  border: 1px solid #ffffff1a;
   align-items: center;
-  gap: .5rem;
+  gap: .75rem;
+  padding: .25rem .25rem .25rem 1rem;
+  transition: all .2s;
   display: flex;
-  overflow: hidden;
+  position: relative;
+}
+
+.Holdings-module-scss-module__0su9yW__searchInputContainer:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px #667eea33;
 }
 
 .Holdings-module-scss-module__0su9yW__searchInput {
-  color: #e0e0e0;
-  box-sizing: border-box;
-  background: #3a3a3a;
-  border: 2px solid #555;
-  border-radius: 6px;
+  color: var(--text-primary);
+  background: none;
+  border: none;
   flex: 1;
-  padding: .5rem .75rem;
-  font-size: .9rem;
-  transition: all .3s;
+  padding: .5rem 0;
+  font-size: .95rem;
 }
 
 .Holdings-module-scss-module__0su9yW__searchInput:focus {
-  border-color: #007bff;
   outline: none;
-  box-shadow: 0 0 0 3px #007bff1a;
 }
 
 .Holdings-module-scss-module__0su9yW__searchInput::placeholder {
-  color: #888;
+  color: var(--text-tertiary);
 }
 
 .Holdings-module-scss-module__0su9yW__searchButton {
-  color: #fff;
+  background: var(--bg-surface);
+  color: var(--primary);
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  background: #007bff;
-  border: none;
-  border-radius: 6px;
+  border: 1px solid #ffffff0d;
   justify-content: center;
   align-items: center;
-  padding: .5rem .75rem;
-  font-size: 1rem;
-  transition: all .3s;
+  width: 36px;
+  height: 36px;
+  transition: all .2s;
   display: flex;
 }
 
 .Holdings-module-scss-module__0su9yW__searchButton:hover {
-  background: #0056b3;
-  transform: translateY(-1px);
+  background: var(--primary);
+  color: #fff;
 }
 
-.Holdings-module-scss-module__0su9yW__searchResults {
-  color: #e0e0e0;
-  background: #1a3a5c;
-  border: 1px solid #007bff;
-  border-radius: 6px;
-  margin-top: .5rem;
-}
-
-.Holdings-module-scss-module__0su9yW__searchResultsHeader {
-  border-bottom: 1px solid #007bff;
-  justify-content: space-between;
-  align-items: center;
-  padding: .75rem 1rem;
+.Holdings-module-scss-module__0su9yW__headerButtons {
+  flex-wrap: wrap;
+  gap: 1rem;
   display: flex;
 }
 
-.Holdings-module-scss-module__0su9yW__searchResultsTitle {
-  color: #e0e0e0;
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.Holdings-module-scss-module__0su9yW__closeSearchResult {
-  color: #e0e0e0;
-  cursor: pointer;
-  background: none;
-  border: none;
-  border-radius: 3px;
-  padding: .25rem;
-  font-size: 1.2rem;
-  transition: all .3s;
-}
-
-.Holdings-module-scss-module__0su9yW__closeSearchResult:hover {
-  background: #ffffff1a;
-}
-
-.Holdings-module-scss-module__0su9yW__searchResultsContent {
-  padding: .5rem;
-}
-
-.Holdings-module-scss-module__0su9yW__userSearchResult {
-  margin-bottom: 1rem;
-}
-
-.Holdings-module-scss-module__0su9yW__userSearchResult:last-child {
-  margin-bottom: 0;
-}
-
-.Holdings-module-scss-module__0su9yW__userHeader {
-  margin-bottom: .5rem;
-}
-
-.Holdings-module-scss-module__0su9yW__userName {
-  color: #007bff;
-  background: #007bff1a;
-  border-radius: 4px;
-  margin: 0;
-  padding: .25rem .5rem;
-  font-size: .9rem;
-  font-weight: 600;
-  display: inline-block;
-}
-
-.Holdings-module-scss-module__0su9yW__searchResultItem {
-  background: #ffffff0d;
-  border-radius: 4px;
-  margin-left: .5rem;
-  padding: .5rem;
-}
-
-.Holdings-module-scss-module__0su9yW__cardInfo {
-  margin-bottom: .5rem;
-}
-
-.Holdings-module-scss-module__0su9yW__cardName {
-  color: #e0e0e0;
-  font-size: .9rem;
-  font-weight: 500;
-}
-
-.Holdings-module-scss-module__0su9yW__statusInfo {
-  font-size: .85rem;
-}
-
-.Holdings-module-scss-module__0su9yW__terminatedInfo {
-  color: #dc3545;
-}
-
-.Holdings-module-scss-module__0su9yW__usingInfo {
-  color: #28a745;
-}
-
-.Holdings-module-scss-module__0su9yW__terminationDate, .Holdings-module-scss-module__0su9yW__endDate {
-  color: #ffc107;
-  font-weight: 600;
-}
-
-.Holdings-module-scss-module__0su9yW__headerButtons, .Holdings-module-scss-module__0su9yW__filterControls {
-  align-items: center;
-  gap: .5rem;
+.Holdings-module-scss-module__0su9yW__filterControls {
   display: flex;
 }
 
 .Holdings-module-scss-module__0su9yW__checkboxLabel {
   cursor: pointer;
-  color: #b0b0b0;
-  background: #3a3a3a;
-  border: 2px dashed #6c757d;
-  border-radius: 8px;
-  flex-direction: column;
-  justify-content: center;
+  background: var(--bg-surface-elevated);
+  border-radius: var(--radius-md);
+  -webkit-user-select: none;
+  user-select: none;
+  border: 1px solid #ffffff0d;
   align-items: center;
-  min-width: 80px;
-  max-width: 80px;
-  height: 56px;
-  padding: .5rem .8rem;
-  font-size: .7rem;
-  transition: all .3s;
+  gap: .5rem;
+  padding: .5rem 1rem;
+  transition: all .2s;
   display: flex;
 }
 
 .Holdings-module-scss-module__0su9yW__checkboxLabel:hover {
-  color: #007bff;
-  background: #1a3a5c;
-  border-color: #007bff;
+  background: #ffffff0d;
 }
 
 .Holdings-module-scss-module__0su9yW__checkboxInput {
-  cursor: pointer;
-  accent-color: #007bff;
-  width: 18px;
-  height: 18px;
-  margin-bottom: .2rem;
+  accent-color: var(--primary);
+  width: 16px;
+  height: 16px;
 }
 
 .Holdings-module-scss-module__0su9yW__checkboxText {
-  -webkit-user-select: none;
-  user-select: none;
-  text-align: center;
-  font-weight: 500;
-  line-height: 1.1;
+  color: var(--text-secondary);
+  font-size: .85rem;
 }
 
 .Holdings-module-scss-module__0su9yW__addCardButton {
-  color: #b0b0b0;
+  border-radius: var(--radius-md);
+  color: var(--status-using);
   cursor: pointer;
-  background: #3a3a3a;
-  border: 2px dashed #6c757d;
-  border-radius: 8px;
-  flex-direction: column;
-  justify-content: center;
+  background: #28a7451a;
+  border: 1px solid #28a74533;
   align-items: center;
-  min-width: 80px;
-  max-width: 80px;
-  height: 56px;
-  padding: .5rem .8rem;
-  transition: all .3s;
+  gap: .5rem;
+  padding: .5rem 1rem;
+  transition: all .2s;
   display: flex;
 }
 
 .Holdings-module-scss-module__0su9yW__addCardButton:hover {
-  color: #007bff;
-  background: #1a3a5c;
-  border-color: #007bff;
-}
-
-.Holdings-module-scss-module__0su9yW__addIcon {
-  margin-bottom: .2rem;
-  font-size: 1.2rem;
-  font-weight: 300;
+  background: #28a74533;
+  transform: translateY(-1px);
 }
 
 .Holdings-module-scss-module__0su9yW__addText {
-  font-size: .7rem;
+  font-size: .85rem;
   font-weight: 500;
 }
 
 .Holdings-module-scss-module__0su9yW__cardsContainer {
   flex-direction: column;
   flex: 1;
-  gap: 2rem;
+  gap: 2.5rem;
+  padding: 0 1.5rem 1.5rem;
   display: flex;
   overflow-y: auto;
 }
 
+.Holdings-module-scss-module__0su9yW__userCards {
+  flex-direction: column;
+  gap: 1rem;
+  display: flex;
+}
+
 .Holdings-module-scss-module__0su9yW__userTitle {
-  text-align: center;
-  color: #fff;
-  border-radius: 6px;
-  margin: 0 0 .75rem;
-  padding: .3rem .8rem;
-  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-tertiary);
+  border-left: 3px solid;
+  margin: 0;
+  padding-left: .5rem;
+  font-size: .9rem;
   font-weight: 600;
 }
 
-.Holdings-module-scss-module__0su9yW__conanTitle {
-  background: linear-gradient(135deg, #4a5a8a, #5a4a7a);
+.Holdings-module-scss-module__0su9yW__userTitle.Holdings-module-scss-module__0su9yW__conanTitle {
+  border-color: var(--user-conan);
 }
 
-.Holdings-module-scss-module__0su9yW__chaejiTitle {
-  background: linear-gradient(135deg, #b83a2a, #a82a1a);
+.Holdings-module-scss-module__0su9yW__userTitle.Holdings-module-scss-module__0su9yW__chaejiTitle {
+  border-color: var(--user-chaeji);
 }
 
 .Holdings-module-scss-module__0su9yW__cardsGrid {
-  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-  gap: .4rem;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
   display: grid;
 }
 
 .Holdings-module-scss-module__0su9yW__cardItem {
+  aspect-ratio: 1.586;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  background: #2a2a2a;
-  border: 2px solid #444;
-  border-radius: 6px;
+  box-shadow: var(--shadow-sm);
+  background: linear-gradient(145deg, #2a2a2a, #222);
+  border: 1px solid #ffffff0d;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 45px;
-  padding: .4rem;
-  transition: all .3s;
+  justify-content: space-between;
+  padding: 1rem;
+  transition: all .3s cubic-bezier(.25, .8, .25, 1);
   display: flex;
   position: relative;
   overflow: hidden;
 }
 
+.Holdings-module-scss-module__0su9yW__cardItem:before {
+  content: "";
+  background: radial-gradient(circle at 100% 0, #ffffff0d, #0000 60%);
+  position: absolute;
+  inset: 0;
+}
+
 .Holdings-module-scss-module__0su9yW__cardItem:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px #0006;
+  box-shadow: var(--shadow-lg);
+  border-color: #ffffff26;
+  transform: translateY(-5px);
 }
 
-.Holdings-module-scss-module__0su9yW__selected {
-  border-color: #007bff;
-  transform: translateY(-1px);
-  box-shadow: 0 0 0 3px #007bff40;
+.Holdings-module-scss-module__0su9yW__cardItem.Holdings-module-scss-module__0su9yW__selected {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px #667eea4d, var(--shadow-lg);
 }
 
-.Holdings-module-scss-module__0su9yW__selected:after {
-  content: "✓";
-  color: #fff;
-  background: #007bff;
-  border-radius: 50%;
-  justify-content: center;
-  align-items: center;
-  width: 16px;
-  height: 16px;
-  font-size: .6rem;
-  font-weight: bold;
-  display: flex;
+.Holdings-module-scss-module__0su9yW__cardItem.Holdings-module-scss-module__0su9yW__selected:after {
+  content: "";
+  border-radius: var(--radius-md);
+  pointer-events: none;
   position: absolute;
-  top: 2px;
-  right: 2px;
+  inset: 0;
+  box-shadow: inset 0 0 20px #667eea1a;
 }
 
-.Holdings-module-scss-module__0su9yW__using {
-  border-color: #28a745;
+.Holdings-module-scss-module__0su9yW__cardItem.Holdings-module-scss-module__0su9yW__conan {
+  background: linear-gradient(135deg, #1e1e28 0%, #14141e 100%);
 }
 
-.Holdings-module-scss-module__0su9yW__using:hover {
-  border-color: #1e7e34;
+.Holdings-module-scss-module__0su9yW__cardItem.Holdings-module-scss-module__0su9yW__chaeji {
+  background: linear-gradient(135deg, #281414 0%, #1e0f0f 100%);
 }
 
-.Holdings-module-scss-module__0su9yW__keeping {
-  border-color: #ffc107;
+.Holdings-module-scss-module__0su9yW__cardItem.Holdings-module-scss-module__0su9yW__terminated {
+  opacity: .6;
+  filter: grayscale(.8);
+  border-style: dashed;
 }
 
-.Holdings-module-scss-module__0su9yW__keeping:hover {
-  border-color: #e0a800;
-}
-
-.Holdings-module-scss-module__0su9yW__terminated {
-  opacity: .7;
-  border-color: #dc3545;
-}
-
-.Holdings-module-scss-module__0su9yW__terminated:hover {
+.Holdings-module-scss-module__0su9yW__cardItem.Holdings-module-scss-module__0su9yW__terminated:hover {
   opacity: .9;
-  border-color: #c82333;
-}
-
-.Holdings-module-scss-module__0su9yW__conan:before {
-  content: "";
-  background: #4a5a8a;
-  width: 4px;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.Holdings-module-scss-module__0su9yW__chaeji:before {
-  content: "";
-  background: #b83a2a;
-  width: 4px;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+  filter: grayscale(.2);
 }
 
 .Holdings-module-scss-module__0su9yW__cardNameSmall {
-  color: #fff;
-  text-align: center;
-  word-break: break-word;
-  text-shadow: 0 1px 2px #00000080;
-  margin-bottom: .2rem;
-  font-size: .6rem;
-  font-weight: 400;
-  line-height: 1.1;
+  color: var(--text-primary);
+  z-index: 1;
+  text-shadow: 0 1px 2px #000c;
+  font-size: .85rem;
+  font-weight: 500;
+  line-height: 1.3;
 }
 
 .Holdings-module-scss-module__0su9yW__cardStatus {
-  color: #b0b0b0;
-  text-align: center;
-  background: #ffffff1a;
-  border-radius: 6px;
-  padding: .1rem .3rem;
-  font-size: .5rem;
-  font-weight: 500;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  color: var(--text-secondary);
+  z-index: 1;
+  background: #0000004d;
+  border-radius: 20px;
+  align-self: flex-start;
+  padding: .25rem .5rem;
+  font-size: .65rem;
+}
+
+.Holdings-module-scss-module__0su9yW__using .Holdings-module-scss-module__0su9yW__cardStatus {
+  color: #4cd175;
+  background: #28a74533;
+}
+
+.Holdings-module-scss-module__0su9yW__keeping .Holdings-module-scss-module__0su9yW__cardStatus {
+  color: #ffd54f;
+  background: #ffc10733;
+}
+
+.Holdings-module-scss-module__0su9yW__terminated .Holdings-module-scss-module__0su9yW__cardStatus {
+  color: #ff6b6b;
+  background: #dc354533;
 }
 
 @media (max-width: 768px) {
-  .Holdings-module-scss-module__0su9yW__headerControls {
-    flex-direction: column;
-    align-items: flex-start;
+  .Holdings-module-scss-module__0su9yW__holdings {
+    box-shadow: none;
+    background: none;
+    border: none;
+    border-radius: 0;
+  }
+
+  .Holdings-module-scss-module__0su9yW__cardsContainer {
+    padding: 0 0 5rem;
+  }
+
+  .Holdings-module-scss-module__0su9yW__cardsGrid {
+    grid-template-columns: 1fr;
     gap: .75rem;
   }
 
-  .Holdings-module-scss-module__0su9yW__searchControls {
-    width: 100%;
+  .Holdings-module-scss-module__0su9yW__cardItem {
+    aspect-ratio: auto;
+    background: var(--bg-surface-elevated);
+    flex-direction: row;
+    align-items: center;
+    min-height: 70px;
+    padding: 1rem;
   }
 
-  .Holdings-module-scss-module__0su9yW__searchInputContainer {
-    flex-direction: column;
-    gap: .5rem;
+  .Holdings-module-scss-module__0su9yW__cardNameSmall {
+    text-align: left;
+    flex: 1;
+    font-size: .95rem;
   }
 
-  .Holdings-module-scss-module__0su9yW__searchInput, .Holdings-module-scss-module__0su9yW__searchButton {
-    width: 100%;
-  }
-
-  .Holdings-module-scss-module__0su9yW__addCardButton, .Holdings-module-scss-module__0su9yW__checkboxLabel {
-    min-width: 60px;
-    height: 48px;
+  .Holdings-module-scss-module__0su9yW__headerControls {
+    gap: 1rem;
   }
 }
 
