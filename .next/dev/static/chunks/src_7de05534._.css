@@ -295,6 +295,17 @@
   overflow-y: auto;
 }
 
+.Holdings-module-scss-module__0su9yW__noResults {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 2rem 1rem;
+  font-size: .95rem;
+}
+
+.Holdings-module-scss-module__0su9yW__noResults p {
+  margin: 0;
+}
+
 .Holdings-module-scss-module__0su9yW__userSearchResult {
   margin-bottom: 1rem;
 }

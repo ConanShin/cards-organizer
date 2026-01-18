@@ -1,10 +1,10 @@
 1:"$Sreact.fragment"
 2:I[47257,["/cards-organizer/_next/static/chunks/2f236954d6a65e12.js"],"ClientPageRoot"]
-3:I[52683,["/cards-organizer/_next/static/chunks/5d4255d2ead2b921.js","/cards-organizer/_next/static/chunks/b8bb3de56b2ccfe2.js"],"default"]
+3:I[52683,["/cards-organizer/_next/static/chunks/5d4255d2ead2b921.js","/cards-organizer/_next/static/chunks/f6f9a6ee53457637.js"],"default"]
 6:I[97367,["/cards-organizer/_next/static/chunks/2f236954d6a65e12.js"],"OutletBoundary"]
 7:"$Sreact.suspense"
-:HL["/cards-organizer/_next/static/chunks/1586661899fe8f23.css","style"]
-0:{"buildId":"28D6D73UxOF0LnXIwWnVI","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","link","0",{"rel":"stylesheet","href":"/cards-organizer/_next/static/chunks/1586661899fe8f23.css","precedence":"next"}],["$","script","script-0",{"src":"/cards-organizer/_next/static/chunks/5d4255d2ead2b921.js","async":true}],["$","script","script-1",{"src":"/cards-organizer/_next/static/chunks/b8bb3de56b2ccfe2.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
+:HL["/cards-organizer/_next/static/chunks/4d8cf7e8deeb692c.css","style"]
+0:{"buildId":"Ud4uBDsKeGBrEH03L57eU","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","link","0",{"rel":"stylesheet","href":"/cards-organizer/_next/static/chunks/4d8cf7e8deeb692c.css","precedence":"next"}],["$","script","script-0",{"src":"/cards-organizer/_next/static/chunks/5d4255d2ead2b921.js","async":true}],["$","script","script-1",{"src":"/cards-organizer/_next/static/chunks/f6f9a6ee53457637.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
 4:{}
 5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
 8:null

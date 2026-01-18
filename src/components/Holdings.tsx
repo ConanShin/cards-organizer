@@ -29,6 +29,7 @@ const Holdings: React.FC = () => {
     const [showTerminated, setShowTerminated] = useState(false);
     const [searchCompany, setSearchCompany] = useState('');
     const [searchResults, setSearchResults] = useState<UserSearchResult[]>([]);
+    const [searchMessage, setSearchMessage] = useState('');
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -123,7 +124,8 @@ const Holdings: React.FC = () => {
 
     const handleSearch = () => {
         if (!searchCompany.trim()) {
-            alert('카드사명을 입력해주세요.');
+            setSearchMessage('검색어를 입력해주세요.');
+            setSearchResults([]);
             return;
         }
 
@@ -133,7 +135,7 @@ const Holdings: React.FC = () => {
         });
 
         if (companyCards.length === 0) {
-            alert(`${companyName} 카드사의 카드를 찾을 수 없습니다.`);
+            setSearchMessage(`'${companyName}'에 대한 검색 결과가 없습니다.`);
             setSearchResults([]);
             return;
         }
@@ -182,6 +184,13 @@ const Holdings: React.FC = () => {
         }).filter((item): item is UserSearchResult => item !== null);
 
         setSearchResults(results);
+        setSearchMessage('');
+    };
+
+    const handleCloseSearch = () => {
+        setSearchResults([]);
+        setSearchMessage('');
+        setSearchCompany('');
     };
 
     return (
@@ -202,42 +211,50 @@ const Holdings: React.FC = () => {
                                 <Search size={16} />
                             </button>
                         </div>
-                        {searchResults.length > 0 && (
+                        {(searchResults.length > 0 || searchMessage) && (
                             <div className={styles.searchResults}>
                                 <div className={styles.searchResultsHeader}>
-                                    <h3 className={styles.searchResultsTitle}>{searchCompany} 카드사 검색 결과</h3>
-                                    <button className={styles.closeSearchResult} onClick={() => setSearchResults([])}>
+                                    <h3 className={styles.searchResultsTitle}>
+                                        {searchMessage ? '알림' : `${searchCompany} 검색 결과`}
+                                    </h3>
+                                    <button className={styles.closeSearchResult} onClick={handleCloseSearch}>
                                         <X size={16} />
                                     </button>
                                 </div>
                                 <div className={styles.searchResultsContent}>
-                                    {searchResults.map((userResult: UserSearchResult) => (
-                                        <div key={userResult.user} className={styles.userSearchResult}>
-                                            <div className={styles.userHeader}>
-                                                <h4 className={styles.userName}>{userResult.user}</h4>
-                                            </div>
-                                            {userResult.results.map(result => (
-                                                <div key={result.cardName} className={styles.searchResultItem}>
-                                                    <div className={styles.cardInfo}>
-                                                        <span className={styles.cardName}>{result.cardName}</span>
-                                                    </div>
-                                                    <div className={styles.statusInfo}>
-                                                        {result.status === 'terminated' ? (
-                                                            <span className={styles.terminatedInfo}>
-                                                                가장 최근 탈퇴일:
-                                                                <span className={styles.terminationDate}> {formatDate(result.terminationDate)} ({getDaysSinceTermination(result.terminationDate)}일 경과)</span>
-                                                            </span>
-                                                        ) : (
-                                                            <span className={styles.usingInfo}>
-                                                                탈퇴예정일:
-                                                                <span className={styles.endDate}> {formatDate(result.endDate)}</span>
-                                                            </span>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            ))}
+                                    {searchMessage ? (
+                                        <div className={styles.noResults}>
+                                            <p>{searchMessage}</p>
                                         </div>
-                                    ))}
+                                    ) : (
+                                        searchResults.map((userResult: UserSearchResult) => (
+                                            <div key={userResult.user} className={styles.userSearchResult}>
+                                                <div className={styles.userHeader}>
+                                                    <h4 className={styles.userName}>{userResult.user}</h4>
+                                                </div>
+                                                {userResult.results.map(result => (
+                                                    <div key={result.cardName} className={styles.searchResultItem}>
+                                                        <div className={styles.cardInfo}>
+                                                            <span className={styles.cardName}>{result.cardName}</span>
+                                                        </div>
+                                                        <div className={styles.statusInfo}>
+                                                            {result.status === 'terminated' ? (
+                                                                <span className={styles.terminatedInfo}>
+                                                                    가장 최근 탈퇴일:
+                                                                    <span className={styles.terminationDate}> {formatDate(result.terminationDate)} ({getDaysSinceTermination(result.terminationDate)}일 경과)</span>
+                                                                </span>
+                                                            ) : (
+                                                                <span className={styles.usingInfo}>
+                                                                    탈퇴예정일:
+                                                                    <span className={styles.endDate}> {formatDate(result.endDate)}</span>
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        ))
+                                    )}
                                 </div>
                             </div>
                         )}

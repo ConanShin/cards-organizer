@@ -164,6 +164,17 @@
     overflow-y: auto;
 }
 
+.noResults {
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+
+    p {
+        margin: 0;
+    }
+}
+
 .userSearchResult {
     margin-bottom: 1rem;
 
