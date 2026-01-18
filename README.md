@@ -1,140 +1,111 @@
 # Cards Organizer
 
-신용카드 혜택을 극대화하기 위한 신용카드 생성, 해지 관련 정보를 관리하는 웹 애플리케이션입니다.
+신용카드 혜택을 극대화하고 보유 현황을 효율적으로 관리하기 위한 웹 애플리케이션입니다.  
+가족 구성원(Conan, Chaeji)별 카드 보유 이력을 시각화하고, 체계적인 검색 및 필터링 기능을 제공합니다.
 
-## 🎯 주요 기능
+<br/>
 
-### Holdings (카드 보유 현황)
-- **현재 소유 중인 카드 관리**: 사용자별로 카드를 분류하여 표시
-- **카드 상태 관리**: 
-  - `using`: 사용 중인 카드 (녹색 테두리)
-  - `keeping`: 보관 중인 카드 (노란색 테두리)  
-  - `terminated`: 해지된 카드 (빨간색 테두리)
-- **해지 카드 표시 옵션**: 체크박스로 해지된 카드 표시/숨김 토글
-- **카드 추가**: 새로운 카드 등록 기능
-- **카드 선택**: 클릭하여 카드 상세 정보 확인
+## 🎯 Key Features (주요 기능)
 
-### Information (카드 정보 및 캘린더)
-- **카드 상세 정보 편집**:
-  - 카드 이름, 사용자, 결제 은행
-  - 연회비, 월 사용금액
-  - 자동 결제 항목 관리 (추가/삭제)
-  - 카드 사용 기간 (시작일/종료일)
-  - 카드 상태 변경
-- **캘린더 뷰**: 
-  - 연도별 카드 보유 기간 시각화
-  - 월별 구분선으로 시간 흐름 표시
-  - 카드별 보유 기간을 타임라인으로 표시
-  - 연도 네비게이션 (이전/다음 연도)
+### 1. 📊 Holdings (카드 보유 대시보드)
+현재 보유 중이거나 해지한 카드를 직관적인 카드 UI로 관리합니다.
 
-## 🛠 기술 스택
+- **사용자별 그룹화**: Conan과 Chaeji의 카드를 구분하여 표시하며, 고유 색상 테마를 적용했습니다.
+- **상태 기반 시각화**: 테두리 색상으로 카드의 현재 상태를 즉시 파악할 수 있습니다.
+  - 🟢 `Using`: 사용 중인 카드 (실적 충족 필요)
+  - 🟡 `Keeping`: 보관 중인 카드 (실적 불필요, 혜택 유지)
+  - 🔴 `Terminated`: 해지된 카드
+- **스마트 검색 기능**:
+  - 카드사명(예: '삼성', '신한')으로 검색 시, 해당 카드사의 보유 이력을 찾아줍니다.
+  - **최적 카드 추천 로직**: 검색 결과 중 '사용 중'인 카드를 우선 표시하며, 모두 해지된 경우 가장 최근에 해지된 카드를 보여줍니다.
+  - 탈퇴일 및 재가입 가능일(탈퇴 후 경과일) 정보를 자동으로 계산하여 표시합니다.
+- **필터링**: '해지된 카드 표시' 체크박스를 통해 현재 유효한 카드만 보거나 전체 이력을 조회할 수 있습니다.
 
-- **Frontend**: Vue.js 2.6.11
-- **Language**: TypeScript 3.9.3
-- **State Management**: Vuex 3.4.0
-- **Routing**: Vue Router 3.2.0
-- **Styling**: SCSS
-- **Build Tool**: Vue CLI 4.5.0
-- **PWA**: Service Worker 지원
+### 2. 📅 Information & Timeline (타임라인)
+카드 보유 기간과 이력을 연도별 타임라인(Gantt Chart) 형태로 시각화합니다.
 
-## 📁 프로젝트 구조
+- **연도별 타임라인**: 
+  - 과거부터 현재까지의 카드 보유 기간을 가로 막대 그래프로 표현합니다.
+  - 연도 네비게이션(<, >)을 통해 과거/미래 이력을 조회할 수 있습니다.
+- **지능형 정렬 (Smart Sorting)**:
+  - 타임라인의 가독성을 위해 **상태(사용중 > 보관중 > 해지됨)** 순서로 우선 정렬합니다.
+  - 그 다음 **사용자(Conan > Chaeji)**별, **가입일** 순으로 자동 정렬되어 중요한 카드가 상단에 배치됩니다.
+- **사용자 구분선**: 타임라인 내에서도 사용자 간의 경계를 구분선(Divider)으로 명확히 표시합니다.
+- **상세 정보 모달**: 타임라인의 카드를 클릭하면 모달 팝업이 열려 상세 정보를 확인하고 편집할 수 있습니다.
 
-```
+### 3. 📝 Card Management (카드 관리)
+- **상세 정보 편집**: 카드명, 결제 은행, 연회비, 월 목표 실적 등을 기록합니다.
+- **자동 이체 관리**: 해당 카드로 연결된 자동 이체 항목(항목명, 금액)을 리스트로 관리합니다.
+- **기간 설정**: 개설일(Start Date)과 해지일(End Date)을 설정하여 타임라인에 반영합니다.
+
+<br/>
+
+## 🛠 Tech Stack
+
+- **Framework**: Vue.js 2.6 (Class-based Component)
+- **Language**: TypeScript 3.9
+- **Style**: SCSS (Scoped CSS)
+- **State Management**: Vuex 3.4
+- **Routing**: Vue Router 3.2
+- **Build**: Vue CLI 4.5
+- **Deploy**: GitHub Pages (docs 폴더 배포)
+
+<br/>
+
+## 📁 Project Structure
+
+```bash
 src/
-├── components/
-│   ├── CalendarRow.vue      # 캘린더 행 컴포넌트
-│   └── CardDetail.vue       # 카드 상세 정보 컴포넌트
-├── views/
-│   ├── Holdings.vue         # 카드 보유 현황 페이지
-│   └── Information.vue      # 카드 정보 및 캘린더 페이지
-├── store/
-│   ├── index.ts            # Vuex 스토어 설정
-│   ├── cards-conan.ts      # Conan 사용자 카드 데이터
-│   └── cards-chaeji.ts     # Chaeji 사용자 카드 데이터
-├── assets/
-│   └── constant.ts         # 카드 상태 상수 정의
-└── router/
-    └── index.ts            # 라우터 설정
+├── assets/         # 상수(ENUM) 및 정적 자원
+├── components/     # 재사용 가능한 컴포넌트
+│   ├── CalendarRow.vue  # 타임라인 차트의 개별 행 (막대바)
+│   └── CardDetail.vue   # 카드 상세 정보 수정 폼
+├── views/          # 메인 페이지
+│   ├── Holdings.vue     # 대시보드 및 검색 페이지
+│   └── Information.vue  # 타임라인 및 캘린더 페이지
+├── store/          # Vuex 상태 관리
+│   ├── cards-conan.ts   # 사용자 A 데이터
+│   └── cards-chaeji.ts  # 사용자 B 데이터
+└── App.vue         # 메인 레이아웃
 ```
 
-## 🚀 설치 및 실행
+<br/>
 
-### 필수 요구사항
-- Node.js (v12 이상)
-- npm 또는 yarn
+## 🚀 Installation & Setup
 
-### 설치
+이 프로젝트는 `Node.js` 환경에서 실행됩니다.
+
+**1. 패키지 설치**
 ```bash
 npm install
 ```
 
-### 개발 서버 실행
+**2. 개발 서버 실행**
 ```bash
 npm run serve
 ```
+브라우저에서 `http://localhost:8080`으로 접속하여 확인합니다.
 
-### 프로덕션 빌드
+**3. 프로덕션 빌드**
 ```bash
 npm run build
 ```
+빌드된 정적 파일은 `docs/` 디렉토리에 생성되며, GitHub Pages 설정을 통해 즉시 배포 가능합니다.
 
-## 📊 데이터 구조
+<br/>
 
-### 카드 객체
-```typescript
-interface Card {
-  id?: string;
-  name: string;                    // 카드 이름
-  holder: 'conan' | 'chaeji';     // 카드 소유자
-  depositBank: string;             // 결제 은행
-  annualFee: string;               // 연회비
-  monthlyUsage: string;            // 월 사용금액
-  debits: Array<{                  // 자동 결제 항목
-    name: string;
-    cost: string;
-  }>;
-  period: {                        // 사용 기간
-    start: string;                 // 시작일 (YYYY-MM-DD)
-    end: string;                   // 종료일 (YYYY-MM-DD)
-  };
-  status: 'using' | 'keeping' | 'terminated';  // 카드 상태
-  selected: boolean;               // 선택 상태
-}
-```
+## 🎨 Design System
 
-## 🎨 UI/UX 특징
+- **Color Palette**:
+  - **Background**: Dark Mode (`#2d2d2d`, `#3a3a3a`)
+  - **Accent**: Blue (`#007bff`)
+  - **Status**:
+    - Using: Green (`#28a745`)
+    - Keeping: Yellow (`#ffc107`)
+    - Terminated: Red (`#dc3545`)
+- **Responsive**: Mobile First 대응 (768px 브레이크포인트)
 
-- **사용자별 색상 구분**: 
-  - Conan: 파란색 계열
-  - Chaeji: 빨간색 계열
-- **직관적인 카드 상태 표시**: 테두리 색상으로 상태 구분
-- **반응형 캘린더**: 연도별 카드 보유 기간을 시각적으로 표현
-- **PWA 지원**: 오프라인에서도 사용 가능
+<br/>
 
-## 🔧 주요 기능 상세
-
-### 카드 관리
-- 카드 추가, 수정, 삭제
-- 카드 상태 변경 (사용중/보관/해지)
-- 자동 결제 항목 관리
-- 카드별 사용 기간 설정
-
-### 캘린더 기능
-- 연도별 카드 보유 기간 시각화
-- 월별 구분선으로 시간 흐름 표시
-- 카드별 타임라인 표시
-- 연도 네비게이션
-
-## 📱 PWA 기능
-
-- Service Worker를 통한 오프라인 지원
-- 앱 설치 가능
-- 모바일 친화적 UI
-
-## 🌐 배포
-
-빌드된 파일은 `docs/` 폴더에 생성되며, GitHub Pages 등 정적 호스팅 서비스에 배포할 수 있습니다.
-
-## 📝 라이선스
-
-이 프로젝트는 개인 학습 목적으로 제작되었습니다.
+## 📝 License
+Personal Project for Study & Management.
