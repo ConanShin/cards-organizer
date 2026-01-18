@@ -8,6 +8,7 @@ const CardDetail: React.FC = () => {
     const selectedCard = useCardsStore(state => state.selectedCard);
     const saveCardAction = useCardsStore(state => state.saveCard);
     const removeCardAction = useCardsStore(state => state.removeCard);
+    const showDialog = useCardsStore(state => state.showDialog);
 
     // Local state for editing form
     const [formData, setFormData] = useState<Card | null>(null);
@@ -82,7 +83,6 @@ const CardDetail: React.FC = () => {
         });
     };
 
-    const showDialog = useCardsStore(state => state.showDialog);
 
     const saveCard = async () => {
         if (!formData || !isFormValid) return;
