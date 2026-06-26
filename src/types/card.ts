@@ -22,3 +22,21 @@ export interface Card {
     selected: boolean;
     isNew?: boolean;
 }
+
+export interface Benefit {
+    title: string;
+    description: string;
+}
+
+export interface RecommendedCard {
+    id: string;
+    company: string; // e.g. "삼성", "신한"
+    name: string;
+    image: string;
+    annualFee: string;
+    previousMonthPerformance: string;
+    benefits: Benefit[];
+    promotionContent: string;
+    promotionPeriod: string;
+    rewardCost: string;
+}
