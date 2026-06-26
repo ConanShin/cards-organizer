@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Card, Debit } from '@/types/card';
 import { CARD_STATUS } from '@/data/constant';
 
-const API_BASE_URL = 'https://conanshin-server.azurewebsites.net/cards-organizer/';
+const API_BASE_URL = 'https://168.107.49.195.sslip.io/cards-organizer/';
 
 const api = axios.create({
     baseURL: API_BASE_URL,

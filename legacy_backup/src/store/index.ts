@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import {CARD_STATUS} from "@/assets/constant";
 const api = axios.create({
-    baseURL: 'https://conanshin-server.azurewebsites.net/cards-organizer/'
+    baseURL: 'https://168.107.49.195.sslip.io/cards-organizer/'
     // baseURL: 'http://localhost:3000/cards-organizer/'
 })
 
